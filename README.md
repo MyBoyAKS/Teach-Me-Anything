@@ -19,7 +19,7 @@ Paste one prompt into an AI assistant and it teaches step-by-step subjects (calc
 2. [How this repo was made](#2-how-this-repo-was-made)
 3. [AI compatibility](#3-ai-compatibility)
 4. [The 3 modes](#4-the-3-modes)
-5. [How to download and use it](#5-how-to-download-and-use-it)
+5. [DOWNLOAD](#5-download)
 6. [The core ideas](#6-the-core-ideas)
 7. [Credit](#7-credit)
 
@@ -72,26 +72,48 @@ Full specs: [`modes/normal.md`](modes/normal.md) · [`modes/widget.md`](modes/wi
 
 ---
 
-## 5. How to download and use it
+## 5. DOWNLOAD
 
-<p align="center"><img src="assets/tutorial.gif" width="340" alt="Walkthrough: copy the prompt, paste into an AI, fill your profile, ask with a mode"></p>
+<p align="center">
+  <a href="https://github.com/MyBoyAKS/Teach-Me-Anything/archive/refs/heads/main.zip"><img src="https://img.shields.io/badge/Download%20ZIP-2ea043?style=for-the-badge&logo=github&logoColor=white" alt="Download ZIP" height="42"></a>
+</p>
 
-**Download**
-- Click the green **Code** button at the top of this page → **Download ZIP**, then unzip it. Or just open [`quick-start.md`](quick-start.md) here on GitHub.
+<p align="center"><img src="assets/tutorial.gif" width="340" alt="Tutorial: download the ZIP, unzip, give the files to your AI, answer its questions, get your lesson"></p>
 
-**Option A: one paste (any AI)**
-1. Open [`quick-start.md`](quick-start.md) and copy the text inside the grey box.
-2. Open a new chat in your AI and paste it.
-3. Replace the `[brackets]` with your own profile: subject, what you already know, what trips you up.
-4. Send it, then ask your question and name a mode, for example:
-   - `Widget mode: teach me row reduction.`
-   - `Ultra mode: teach me how to balance Fe + O₂ → Fe₂O₃.`
-   - `Normal mode: check my answer (photo attached).`
+### Option A: give everything to the AI (recommended)
+1. **Download:** click the green **Download ZIP** button above. You get `Teach-Me-Anything-main.zip`.
+2. **Unzip:** right-click the file → **Extract All** (Windows) or double-click it (Mac). On a phone, open it in your Files app and tap **Extract**.
+3. **Give it to your AI:** open a new chat and drag in all the files from the folder (or the ZIP itself, if your AI accepts ZIPs). Then send **`Start`**.
+4. **Answer the AI:** it reads `START-HERE.md` and asks you:
+   - what subject you're studying,
+   - what you already know well,
+   - what usually trips you up,
+   - what you want to learn first, and which mode (**Normal**, **Widget** or **Ultra**).
+5. **Learn:** it builds your lesson in the mode you picked.
 
-**Option B: upload once**
-Add the `.md` files as project files / knowledge (for example Claude Projects), or paste [`learner-profile.md`](learner-profile.md) into custom instructions. After that, just ask.
+> [!TIP]
+> Using Claude? Put the files in a **Project** once, and every new chat in that project already knows the method.
 
-**If your AI can't make interactive pages**, ask for one `.html` file, save it, and open it in your browser. The working pages in [`examples/`](examples/) also open this way: download the file and double-click it.
+### Option B: file by file (if you'd rather check everything yourself)
+Don't want to download a ZIP from a stranger? Fair. Every file is plain text, so you can **read each one first** and download only what you want:
+
+| File | What it is | Download |
+|---|---|:-:|
+| [`START-HERE.md`](START-HERE.md) | tells the AI what to do first | [⬇ download](https://github.com/MyBoyAKS/Teach-Me-Anything/raw/main/START-HERE.md) |
+| [`quick-start.md`](quick-start.md) | the full prompt and the 3 modes | [⬇ download](https://github.com/MyBoyAKS/Teach-Me-Anything/raw/main/quick-start.md) |
+| [`learner-profile.md`](learner-profile.md) | profile template + example | [⬇ download](https://github.com/MyBoyAKS/Teach-Me-Anything/raw/main/learner-profile.md) |
+| [`modes/normal.md`](modes/normal.md) | Normal mode spec | [⬇ download](https://github.com/MyBoyAKS/Teach-Me-Anything/raw/main/modes/normal.md) |
+| [`modes/widget.md`](modes/widget.md) | Widget mode spec | [⬇ download](https://github.com/MyBoyAKS/Teach-Me-Anything/raw/main/modes/widget.md) |
+| [`modes/ultra.md`](modes/ultra.md) | Ultra mode spec | [⬇ download](https://github.com/MyBoyAKS/Teach-Me-Anything/raw/main/modes/ultra.md) |
+| [`widget-engine.md`](widget-engine.md) | how to build the interactive page | [⬇ download](https://github.com/MyBoyAKS/Teach-Me-Anything/raw/main/widget-engine.md) |
+| [`evidence.md`](evidence.md) | the research behind it | [⬇ download](https://github.com/MyBoyAKS/Teach-Me-Anything/raw/main/evidence.md) |
+
+On a computer, the download link may open the file as text: press **Ctrl + S** (Mac: **Cmd + S**) to save it, or right-click the link → **Save link as…**
+
+**Shortest version:** open [`quick-start.md`](quick-start.md), copy the text inside the grey box, paste it into your AI, and send. It will ask you the same questions as in Option A.
+
+### If your AI can't make interactive pages
+Ask for one `.html` file, save it, and open it in your browser. The working pages in [`examples/`](examples/) also open this way: download a file and double-click it.
 
 ---
 

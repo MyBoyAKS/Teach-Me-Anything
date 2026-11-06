@@ -62,7 +62,7 @@ button.main{background:var(--bar);border-color:var(--bar);color:#fff;min-width:5
 </head>
 <body>
 <div class="app">
-  <header><h1>How to use Teach Me Anything</h1><p class="sub">A 50-second walkthrough. Works with any AI chat (ChatGPT, Gemini, Claude, …). Drag the slider to any moment.</p></header>
+  <header><h1>How to use Teach Me Anything</h1><p class="sub">Download the ZIP, give it to your AI, answer its questions, and learn. Drag the slider to any moment.</p></header>
   <div class="card">
     <div class="screen">
       <span class="chip" id="chip"></span>
@@ -84,39 +84,42 @@ const CUR=`<svg viewBox="0 0 24 24" width="18" height="18"><path d="M3 2l7 19 2.
 function cursor(x,y){return `<div class="cursor" style="left:${x}px;top:${y}px">${CUR}</div>`}
 function ripple(x,y,u){if(u<=0||u>=1)return '';const r=8+u*26;return `<div class="ripple" style="left:${x-r}px;top:${y-r}px;width:${2*r}px;height:${2*r}px;opacity:${1-u}"></div>`}
 const typed=(s,u)=>s.slice(0,Math.round(s.length*clamp(u)));
-const PROMPT='You are my tutor. Teach me using one of three modes…\n=== MY PROFILE ===\n- Subject: [your subject]\n- I already know: […]\n=== RULES FOR EVERY MODE === …';
 const S=[
- {name:'Get the prompt',dur:7,say:'Step 1: open the Teach Me Anything page and copy the prompt.',note:'On the website, press "Copy prompt". (On GitHub: open quick-start.md and copy the text in the box.)',
-  draw:u=>{const bx=26,by=200;const cx=lerp(330,bx+50,seg(u,.1,.5)),cy=lerp(250,by+14,seg(u,.1,.5));
-   return `<div class="win"><div class="bar"><i></i><i></i><i></i>&nbsp; Teach Me Anything</div><div class="body">
-   <div style="font-weight:800;font-size:1.2rem">Teach Me Anything</div><div style="color:var(--muted);font-size:.8rem;margin:4px 0 10px">Three learning modes for AI tutors.</div>
-   <div style="border:1px solid var(--line);border-radius:10px;padding:8px;font-family:monospace;font-size:.68rem;color:var(--muted);height:58px;overflow:hidden">${PROMPT.replace(/\n/g,'<br>')}</div></div></div>
-   <div class="btn p" style="position:absolute;left:${bx}px;top:${by}px">Copy prompt</div>
-   ${u>.55&&u<.72?ripple(bx+50,by+16,(u-.55)/.17):''}${u>.6?`<div class="toast" style="top:${by+4}px;left:${bx+190}px">Copied ✓</div>`:''}${cursor(cx,cy)}`}},
- {name:'Open any AI chat',dur:5,say:'Step 2: open a new chat in the AI you like.',note:'Any assistant works. Widget and Ultra need one that can make web pages (artifacts / canvas / an .html file).',
-  draw:u=>{const cx=lerp(60,200,seg(u,.2,.7)),cy=lerp(60,252,seg(u,.2,.7));
-   return `<div class="win"><div class="bar"><i></i><i></i><i></i>&nbsp; Your AI chat</div><div class="body"><div style="color:var(--muted);text-align:center;margin-top:50px;font-weight:700">How can I help you today?</div><div class="input" style="color:var(--muted)">Message…</div><div class="send">↑</div></div></div>${u>.72&&u<.9?ripple(210,262,(u-.72)/.18):''}${cursor(cx,cy)}`}},
- {name:'Paste it',dur:6,say:'Step 3: paste the prompt into the message box.',note:'Ctrl+V (or long-press → Paste on a phone). Don\'t send yet: first fill in your profile.',
-  draw:u=>`<div class="win"><div class="bar"><i></i><i></i><i></i>&nbsp; Your AI chat</div><div class="body"><div class="input">${typed(PROMPT,seg(u,.1,.5)).replace(/\n/g,'<br>')}</div><div class="send">↑</div></div></div>
-   <div style="position:absolute;right:26px;top:56px;background:var(--fg);color:var(--bg);font-weight:800;border-radius:8px;padding:4px 10px;opacity:${1-seg(u,.55,.8)}">Ctrl + V</div>`},
- {name:'Fill your profile',dur:8,say:'Step 4: replace the [brackets] with your own info.',note:'Your subject, what you know, what trips you up. The more honest, the better the lessons fit you.',
-  draw:u=>{const sub=u<.35?'[your subject]':typed('Linear Algebra',seg(u,.35,.6));const kn=u<.6?'[…]':typed('matrices, SMA algebra',seg(u,.6,.85));const on1=u<.6&&u>.08,on2=u>=.6;
-   return `<div class="win"><div class="bar"><i></i><i></i><i></i>&nbsp; Your AI chat</div><div class="body"><div class="lab" style="position:static;margin:6px 0 0;text-align:center">${on2?'↓ what you already know':'↓ your subject goes here'}</div><div class="input" style="max-height:200px">You are my tutor. Teach me using one of three modes…<br>=== MY PROFILE ===<br>- Subject: <b class="${on1?'hli':''}">${sub}</b><br>- I already know: <b class="${on2?'hli':''}">${kn}</b><br>=== RULES FOR EVERY MODE === …</div><div class="send">↑</div></div></div>`}},
- {name:'Ask with a mode',dur:7,say:'Step 5: send it, then ask your question and name a mode.',note:'"Normal mode: …", "Widget mode: …" or "Ultra mode: …". If you forget, the AI will ask you.',
-  draw:u=>{const q=typed('Widget mode: teach me row reduction',seg(u,.15,.6));const sent=u>.75;const qh=q.length>12?`<span class="hli">${q.slice(0,12)}</span>${q.slice(12)}`:q;
-   return `<div class="win"><div class="bar"><i></i><i></i><i></i>&nbsp; Your AI chat</div><div class="body">
-   <div class="bub me">(your Teach Me Anything prompt)</div><div class="bub ai">Got it! Which topic, and which mode: Normal, Widget or Ultra?</div>
-   ${sent?`<div class="bub me"><span class="hli">Widget mode:</span> teach me row reduction</div>`:`<div class="lab" style="position:static;margin-top:16px;opacity:${seg(u,.2,.35)}">↓ name the mode first</div>`}
-   <div class="input">${sent?'<span style="color:var(--muted)">Message…</span>':qh}</div><div class="send">↑</div></div></div>
-   ${u>.66&&u<.82?ripple(323,262,(u-.66)/.16):''}${cursor(lerp(250,316,seg(u,.55,.66)),lerp(200,252,seg(u,.55,.66)))}`}},
- {name:'Get your lesson',dur:7,say:'Step 6: the AI builds your lesson.',note:'Widget/Ultra: an interactive page with a slider. If your AI can\'t make pages, ask for a single .html file, save it and open it in your browser.',
+ {name:'Download the ZIP',dur:6,say:'Step 1: on the GitHub page, click "Download ZIP".',note:'It is the green button near the top of the README. You get Teach-Me-Anything-main.zip.',
+  draw:u=>{const bx=24,by=118,cx=lerp(320,bx+70,seg(u,.1,.45)),cy=lerp(250,by+16,seg(u,.1,.45));
+   return `<div class="win"><div class="bar"><i></i><i></i><i></i>&nbsp; GitHub · Teach-Me-Anything</div><div class="body">
+   <div style="font-weight:800;font-size:1.15rem">Teach Me Anything</div><div style="color:var(--muted);font-size:.78rem;margin:2px 0 10px">Three learning modes for AI tutors.</div></div></div>
+   <div class="btn" style="position:absolute;left:${bx}px;top:${by}px;background:#2ea043;border-color:#2ea043;color:#fff">⬇ Download ZIP</div>
+   ${u>.5&&u<.68?ripple(bx+70,by+16,(u-.5)/.18):''}
+   ${u>.6?`<div class="file" style="left:40px;top:200px;opacity:${seg(u,.6,.75)}">🗜️ Teach-Me-Anything-main.zip &nbsp;<span style="color:var(--ok)">downloaded ✓</span></div>`:''}${cursor(cx,cy)}`}},
+ {name:'Unzip it',dur:7,say:'Step 2: unzip it (right-click → Extract All).',note:'On a phone, open it in your Files app and tap Extract. You get a folder with the .md files inside.',
+  draw:u=>{const files=['START-HERE.md','quick-start.md','learner-profile.md','modes/','examples/'];let o=`<div class="win"><div class="bar"><i></i><i></i><i></i>&nbsp; Downloads</div><div class="body">
+   <div class="file" style="position:static;display:inline-flex">🗜️ Teach-Me-Anything-main.zip</div>`;
+   if(u>.2&&u<.5)o+=`<div style="position:absolute;left:60px;top:44px;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:4px 0;font-size:.78rem;box-shadow:0 4px 12px rgba(0,0,0,.2)"><div style="padding:4px 12px">Open</div><div style="padding:4px 12px;background:color-mix(in srgb,var(--ln) 20%,transparent);font-weight:700">Extract All…</div><div style="padding:4px 12px">Delete</div></div>`;
+   if(u>=.5){o+=`<div style="margin-top:10px;font-weight:700;font-size:.8rem">📁 Teach-Me-Anything-main</div>`;files.forEach((f,i)=>{const p=seg(u,.52+i*.07,.62+i*.07);o+=`<div style="margin:4px 0 0 18px;font-size:.78rem;opacity:${p}">${f.endsWith('/')?'📁':'📄'} ${f}</div>`})}
+   return o+`</div></div>${cursor(lerp(300,110,seg(u,.05,.2)),lerp(240,30,seg(u,.05,.2))+(u>.3?28:0))}`}},
+ {name:'Give everything to the AI',dur:7,say:'Step 3: drag all the files into a new chat with your AI, then send "Start".',note:'Attach the files (or the ZIP itself, if your AI accepts ZIPs). START-HERE.md tells the AI what to do.',
+  draw:u=>{const F=['START-HERE.md','quick-start.md','modes/widget.md','modes/ultra.md'];let o=`<div class="win"><div class="bar"><i></i><i></i><i></i>&nbsp; Your AI chat</div><div class="body"><div style="color:var(--muted);text-align:center;margin-top:30px;font-weight:700">How can I help you today?</div>
+   <div class="input" style="min-height:96px">${u>.75?typed('Start',seg(u,.75,.88)):'<span style="color:var(--muted)">Message…</span>'}</div><div class="send">↑</div></div></div>`;
+   F.forEach((f,i)=>{const p=seg(u,.05+i*.13,.25+i*.13);const x=lerp(40+i*20,26+(i%2)*150,p),y=lerp(40,212+Math.floor(i/2)*26,p);o+=`<div class="file" style="left:${x}px;top:${y}px;opacity:${p>0?1:0};padding:3px 8px">📄 ${f}</div>`});
+   return o+(u>.9?ripple(323,262,(u-.9)/.1):'')}},
+ {name:'The AI asks about you',dur:7,say:'Step 4: the AI asks about you before teaching.',note:'It wants your subject, what you already know, what trips you up, and which mode you want.',
+  draw:u=>{const Q='Hi! Before we start:\n1. What subject are you studying?\n2. What do you already know well?\n3. What usually trips you up?\n4. What do you want to learn first, and which mode: Normal, Widget or Ultra?';
+   return `<div class="win"><div class="bar"><i></i><i></i><i></i>&nbsp; Your AI chat</div><div class="body"><div class="bub me">📎 4 files · Start</div><div class="bub ai" style="white-space:pre-wrap">${typed(Q,seg(u,.05,.7))}</div></div></div>`}},
+ {name:'Answer + pick a mode',dur:8,say:'Step 5: answer, and name the mode you want.',note:'Be honest about what you know and what trips you up: the lessons are built around it.',
+  draw:u=>{const A='1. Linear algebra\n2. Matrices, high-school algebra\n3. Sign mistakes\n4. Row reduction, Widget mode';const t=typed(A,seg(u,.05,.6));const sent=u>.72;
+   const hl=x=>x.replace('Widget mode','<span class="hli">Widget mode</span>');
+   return `<div class="win"><div class="bar"><i></i><i></i><i></i>&nbsp; Your AI chat</div><div class="body"><div class="bub ai" style="font-size:.72rem">1. Subject? 2. What you know? 3. What trips you up? 4. Topic + mode?</div>
+   ${sent?`<div class="bub me" style="white-space:pre-wrap">${hl(A)}</div>`:''}<div class="input" style="white-space:pre-wrap">${sent?'<span style="color:var(--muted)">Message…</span>':hl(t)}</div><div class="send">↑</div></div></div>${u>.64&&u<.8?ripple(323,262,(u-.64)/.16):''}`}},
+ {name:'Get your lesson',dur:7,say:'Step 6: the AI builds your lesson.',note:'Widget/Ultra: an interactive page with a slider. If your AI can\'t make pages, ask for a single .html file and open it in your browser.',
   draw:u=>`<div class="win"><div class="bar"><i></i><i></i><i></i>&nbsp; Your AI chat</div><div class="body">
-   <div class="bub me">Widget mode: teach me row reduction</div>
+   <div class="bub me">4. Row reduction, Widget mode</div>
    <div class="bub ai" style="opacity:${seg(u,.05,.25)}">Here's your lesson: drag the slider to any moment.
    <div class="mini"><div class="scr">[ 1 &nbsp;2 | 3 ] &nbsp;→&nbsp; −4r₁ + r₂</div><div class="pb"><b>▶</b><div class="track"><span style="width:${100*seg(u,.3,1)}%"></span></div></div></div></div></div></div>`},
- {name:'Option B: upload the files',dur:8,say:'Option B: upload the files once, then just ask.',note:'Add the .md files as project files / knowledge (Projects, custom GPTs, Gems…) or paste learner-profile.md into custom instructions.',
-  draw:u=>{const F=['quick-start.md','learner-profile.md','modes/widget.md','modes/ultra.md'];let o=`<div class="win"><div class="bar"><i></i><i></i><i></i>&nbsp; Project files / knowledge</div><div class="body"><div class="drop" style="align-items:end;padding-bottom:16px">${u>.8?'<span style="color:var(--ok)">4 files added ✓</span>':'Drop files here'}</div></div></div>`;
-   F.forEach((f,i)=>{const p=seg(u,.1+i*.14,.3+i*.14);const x=lerp(20+i*10,30+(i%2)*165,p),y=lerp(-40,70+Math.floor(i/2)*44,p);o+=`<div class="file" style="left:${x}px;top:${y}px;opacity:${p>0?1:0}">📄 ${f}</div>`});return o}}
+ {name:'Option B: file by file',dur:8,say:'Option B: don\'t want the ZIP? Open the files one by one.',note:'Read each .md first, download it, or copy quick-start.md into your chat. Same result, and you see everything you give the AI.',
+  draw:u=>{const F=['START-HERE.md','quick-start.md','learner-profile.md','modes/widget.md'];let o=`<div class="win"><div class="bar"><i></i><i></i><i></i>&nbsp; GitHub · Teach-Me-Anything</div><div class="body"><div style="font-weight:800;font-size:.85rem;margin-bottom:6px">Option B: download each file</div>`;
+   F.forEach((f,i)=>{o+=`<div style="display:flex;justify-content:space-between;align-items:center;border:1px solid var(--line);border-radius:8px;padding:6px 8px;margin-bottom:6px;font-size:.78rem;${u>.35+i*.12&&u<.45+i*.12?'outline:2px solid var(--tan)':''}"><span>📄 ${f}</span><span class="btn" style="padding:3px 8px;font-size:.72rem">⬇ download</span></div>`});
+   o+=`</div></div>`;const ty=58+Math.min(3,Math.floor(Math.max(0,u-.3)/.12))*34;return o+cursor(lerp(300,290,seg(u,.1,.3)),lerp(260,ty,seg(u,.1,.3)))}}
 ];
 let total=0;S.forEach(s=>{s.start=total;total+=s.dur});
 const sc=document.getElementById('sc');sc.max=total;
