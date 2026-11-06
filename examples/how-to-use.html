@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>How to Use: Teach Me Anything</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700;800&display=swap">
+<style>
+:root{--bg:#eef0f6;--card:#fff;--scr:#fbfcff;--fg:#1d2433;--muted:#5d6678;--line:#d9dde8;--panel:#f7f8fc;--ln:#2563eb;--tan:#e07a00;--ok:#15803d;--bar:#d0263f;--chip:#eceffa;--win:#ffffff;--ui:"Figtree",system-ui,-apple-system,sans-serif}
+@media (prefers-color-scheme:dark){:root{--bg:#0e1118;--card:#181d2a;--scr:#131826;--fg:#e8ebf3;--muted:#a3abbd;--line:#2c3344;--panel:#1f2535;--ln:#6ea0ff;--tan:#ffa94d;--ok:#4ade80;--bar:#ff5c7a;--chip:#232a3d;--win:#1b2132;color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--ui);font-size:15px;line-height:1.45}
+.app{max-width:680px;margin:0 auto;padding:14px 16px 28px;display:flex;flex-direction:column;gap:12px}
+h1{font-size:1.2rem;margin:0}.sub{color:var(--muted);margin:2px 0 0;font-size:.9rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.screen{background:var(--scr);padding:10px 0 12px}
+.chip{display:inline-block;margin:0 12px;font-size:.72rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);background:var(--chip);border-radius:999px;padding:3px 10px}
+.say{min-height:52px;display:grid;place-items:center;text-align:center;font-weight:700;padding:4px 14px}
+.stage{position:relative;height:300px;margin:0 12px;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--panel)}
+.note{min-height:54px;display:grid;place-items:center;text-align:center;font-size:.88rem;color:var(--muted);margin:10px 14px 0;background:color-mix(in srgb,var(--tan) 9%,transparent);border-radius:12px;padding:6px 10px}
+.win{position:absolute;inset:14px;background:var(--win);border:1px solid var(--line);border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,.12);overflow:hidden}
+.bar{height:30px;display:flex;align-items:center;gap:6px;padding:0 10px;border-bottom:1px solid var(--line);font-size:.75rem;color:var(--muted);font-weight:700}
+.bar i{width:9px;height:9px;border-radius:50%;background:var(--line);display:inline-block}
+.body{padding:12px;position:relative;height:calc(100% - 30px)}
+.btn{display:inline-block;padding:8px 14px;border-radius:10px;font-weight:700;font-size:.85rem;border:1px solid var(--line);background:var(--card)}
+.btn.p{background:var(--bar);border-color:var(--bar);color:#fff}
+.input{position:absolute;left:12px;right:12px;bottom:12px;min-height:44px;border:1.5px solid var(--line);border-radius:12px;padding:8px 46px 8px 10px;font-size:.8rem;background:var(--card);white-space:pre-wrap;overflow:hidden;max-height:150px}
+.send{position:absolute;right:20px;bottom:20px;width:30px;height:30px;border-radius:50%;background:var(--ln);color:#fff;display:grid;place-items:center;font-weight:800;font-size:.9rem}
+.bub{max-width:85%;border-radius:12px;padding:8px 10px;font-size:.8rem;margin-bottom:8px}
+.bub.me{margin-left:auto;background:color-mix(in srgb,var(--ln) 16%,var(--card))}
+.bub.ai{background:var(--chip)}
+.toast{position:absolute;top:44px;left:50%;transform:translateX(-50%);background:var(--ok);color:#fff;font-weight:700;font-size:.8rem;padding:5px 12px;border-radius:999px}
+.cursor{position:absolute;width:18px;height:18px;pointer-events:none;z-index:10}
+.ripple{position:absolute;border:2px solid var(--bar);border-radius:50%;pointer-events:none;z-index:9}
+.hl{position:absolute;border:2.5px solid var(--tan);background:color-mix(in srgb,var(--tan) 14%,transparent);border-radius:8px;z-index:8}
+.hli{outline:2.5px solid var(--tan);background:color-mix(in srgb,var(--tan) 18%,transparent);border-radius:5px;padding:0 3px}
+.lab{position:absolute;color:var(--tan);font-weight:800;font-size:.8rem;z-index:8;white-space:nowrap}
+.file{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border:1px solid var(--line);border-radius:9px;background:var(--card);font-size:.75rem;font-weight:700;position:absolute}
+.drop{position:absolute;left:12px;right:12px;top:40px;bottom:12px;border:2px dashed var(--line);border-radius:12px;display:grid;place-items:center;color:var(--muted);font-weight:700;font-size:.85rem}
+.mini{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--scr);margin-top:6px}
+.mini .scr{height:70px;display:grid;place-items:center;font-family:serif;font-size:1.1rem}
+.mini .pb{display:flex;align-items:center;gap:8px;padding:6px 8px;border-top:1px solid var(--line)}
+.mini .pb b{background:var(--bar);color:#fff;border-radius:6px;padding:2px 8px;font-size:.7rem}
+.mini .track{flex:1;height:4px;border-radius:2px;background:var(--line);position:relative}
+.mini .track span{position:absolute;left:0;top:0;bottom:0;background:var(--bar);border-radius:2px}
+.player{border-top:1px solid var(--line);padding:8px 14px 12px;background:var(--panel)}
+.scrub{position:relative;height:30px}
+.ticks{position:absolute;left:0;right:0;top:4px;height:6px;pointer-events:none}
+.ticks i{position:absolute;top:0;width:3px;height:6px;background:var(--muted);border-radius:1px}
+#sc{position:absolute;left:0;right:0;top:8px;width:100%;margin:0;height:22px;accent-color:var(--bar)}
+.pbar{display:grid;grid-template-columns:auto auto 1fr auto;gap:10px;align-items:center;margin-top:6px}
+button{font:inherit;font-weight:700;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--fg);cursor:pointer;min-height:44px;padding:6px 12px}
+button.main{background:var(--bar);border-color:var(--bar);color:#fff;min-width:5.4em}
+.time{font-variant-numeric:tabular-nums;font-weight:700;font-size:.9rem}
+.chapname{font-size:.85rem;font-weight:700;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.chaps{display:grid;gap:6px;padding:10px 14px}
+.chaps button{text-align:left;display:flex;gap:10px;align-items:center;min-height:42px;font-weight:600}
+.chaps button b{color:var(--bar);min-width:2.6em;font-variant-numeric:tabular-nums}
+.chaps button.on{border-color:var(--bar)}
+.hd{padding:10px 14px;border-bottom:1px solid var(--line);font-weight:700}
+</style>
+</head>
+<body>
+<div class="app">
+  <header><h1>How to use Teach Me Anything</h1><p class="sub">A 50-second walkthrough. Works with any AI chat (ChatGPT, Gemini, Claude, …). Drag the slider to any moment.</p></header>
+  <div class="card">
+    <div class="screen">
+      <span class="chip" id="chip"></span>
+      <div class="say" id="say"></div>
+      <div class="stage" id="stage"></div>
+      <div class="note" id="note"></div>
+    </div>
+    <div class="player">
+      <div class="scrub"><div class="ticks" id="ticks"></div><input type="range" id="sc" min="0" max="100" step="0.01" value="0" aria-label="Video position"></div>
+      <div class="pbar"><button type="button" class="main" id="pp">Play</button><button type="button" id="spd">1×</button><span class="chapname" id="cn"></span><span class="time" id="tm"></span></div>
+    </div>
+  </div>
+  <div class="card"><div class="hd">Chapters</div><div class="chaps" id="chaps"></div></div>
+</div>
+<script>
+const clamp=v=>Math.max(0,Math.min(1,v)),ease=p=>p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2,lerp=(a,b,p)=>a+(b-a)*p;
+const seg=(u,a,b)=>ease(clamp((u-a)/(b-a)));
+const CUR=`<svg viewBox="0 0 24 24" width="18" height="18"><path d="M3 2l7 19 2.5-7.5L20 11z" fill="#fff" stroke="#111" stroke-width="1.6" stroke-linejoin="round"/></svg>`;
+function cursor(x,y){return `<div class="cursor" style="left:${x}px;top:${y}px">${CUR}</div>`}
+function ripple(x,y,u){if(u<=0||u>=1)return '';const r=8+u*26;return `<div class="ripple" style="left:${x-r}px;top:${y-r}px;width:${2*r}px;height:${2*r}px;opacity:${1-u}"></div>`}
+const typed=(s,u)=>s.slice(0,Math.round(s.length*clamp(u)));
+const PROMPT='You are my tutor. Teach me using one of three modes…\n=== MY PROFILE ===\n- Subject: [your subject]\n- I already know: […]\n=== RULES FOR EVERY MODE === …';
+const S=[
+ {name:'Get the prompt',dur:7,say:'Step 1: open the Teach Me Anything page and copy the prompt.',note:'On the website, press "Copy prompt". (On GitHub: open quick-start.md and copy the text in the box.)',
+  draw:u=>{const bx=26,by=200;const cx=lerp(330,bx+50,seg(u,.1,.5)),cy=lerp(250,by+14,seg(u,.1,.5));
+   return `<div class="win"><div class="bar"><i></i><i></i><i></i>&nbsp; Teach Me Anything</div><div class="body">
+   <div style="font-weight:800;font-size:1.2rem">Teach Me Anything</div><div style="color:var(--muted);font-size:.8rem;margin:4px 0 10px">Three learning modes for AI tutors.</div>
+   <div style="border:1px solid var(--line);border-radius:10px;padding:8px;font-family:monospace;font-size:.68rem;color:var(--muted);height:58px;overflow:hidden">${PROMPT.replace(/\n/g,'<br>')}</div></div></div>
+   <div class="btn p" style="position:absolute;left:${bx}px;top:${by}px">Copy prompt</div>
+   ${u>.55&&u<.72?ripple(bx+50,by+16,(u-.55)/.17):''}${u>.6?`<div class="toast" style="top:${by+4}px;left:${bx+190}px">Copied ✓</div>`:''}${cursor(cx,cy)}`}},
+ {name:'Open any AI chat',dur:5,say:'Step 2: open a new chat in the AI you like.',note:'Any assistant works. Widget and Ultra need one that can make web pages (artifacts / canvas / an .html file).',
+  draw:u=>{const cx=lerp(60,200,seg(u,.2,.7)),cy=lerp(60,252,seg(u,.2,.7));
+   return `<div class="win"><div class="bar"><i></i><i></i><i></i>&nbsp; Your AI chat</div><div class="body"><div style="color:var(--muted);text-align:center;margin-top:50px;font-weight:700">How can I help you today?</div><div class="input" style="color:var(--muted)">Message…</div><div class="send">↑</div></div></div>${u>.72&&u<.9?ripple(210,262,(u-.72)/.18):''}${cursor(cx,cy)}`}},
+ {name:'Paste it',dur:6,say:'Step 3: paste the prompt into the message box.',note:'Ctrl+V (or long-press → Paste on a phone). Don\'t send yet: first fill in your profile.',
+  draw:u=>`<div class="win"><div class="bar"><i></i><i></i><i></i>&nbsp; Your AI chat</div><div class="body"><div class="input">${typed(PROMPT,seg(u,.1,.5)).replace(/\n/g,'<br>')}</div><div class="send">↑</div></div></div>
+   <div style="position:absolute;right:26px;top:56px;background:var(--fg);color:var(--bg);font-weight:800;border-radius:8px;padding:4px 10px;opacity:${1-seg(u,.55,.8)}">Ctrl + V</div>`},
+ {name:'Fill your profile',dur:8,say:'Step 4: replace the [brackets] with your own info.',note:'Your subject, what you know, what trips you up. The more honest, the better the lessons fit you.',
+  draw:u=>{const sub=u<.35?'[your subject]':typed('Linear Algebra',seg(u,.35,.6));const kn=u<.6?'[…]':typed('matrices, SMA algebra',seg(u,.6,.85));const on1=u<.6&&u>.08,on2=u>=.6;
+   return `<div class="win"><div class="bar"><i></i><i></i><i></i>&nbsp; Your AI chat</div><div class="body"><div class="lab" style="position:static;margin:6px 0 0;text-align:center">${on2?'↓ what you already know':'↓ your subject goes here'}</div><div class="input" style="max-height:200px">You are my tutor. Teach me using one of three modes…<br>=== MY PROFILE ===<br>- Subject: <b class="${on1?'hli':''}">${sub}</b><br>- I already know: <b class="${on2?'hli':''}">${kn}</b><br>=== RULES FOR EVERY MODE === …</div><div class="send">↑</div></div></div>`}},
+ {name:'Ask with a mode',dur:7,say:'Step 5: send it, then ask your question and name a mode.',note:'"Normal mode: …", "Widget mode: …" or "Ultra mode: …". If you forget, the AI will ask you.',
+  draw:u=>{const q=typed('Widget mode: teach me row reduction',seg(u,.15,.6));const sent=u>.75;const qh=q.length>12?`<span class="hli">${q.slice(0,12)}</span>${q.slice(12)}`:q;
+   return `<div class="win"><div class="bar"><i></i><i></i><i></i>&nbsp; Your AI chat</div><div class="body">
+   <div class="bub me">(your Teach Me Anything prompt)</div><div class="bub ai">Got it! Which topic, and which mode: Normal, Widget or Ultra?</div>
+   ${sent?`<div class="bub me"><span class="hli">Widget mode:</span> teach me row reduction</div>`:`<div class="lab" style="position:static;margin-top:16px;opacity:${seg(u,.2,.35)}">↓ name the mode first</div>`}
+   <div class="input">${sent?'<span style="color:var(--muted)">Message…</span>':qh}</div><div class="send">↑</div></div></div>
+   ${u>.66&&u<.82?ripple(323,262,(u-.66)/.16):''}${cursor(lerp(250,316,seg(u,.55,.66)),lerp(200,252,seg(u,.55,.66)))}`}},
+ {name:'Get your lesson',dur:7,say:'Step 6: the AI builds your lesson.',note:'Widget/Ultra: an interactive page with a slider. If your AI can\'t make pages, ask for a single .html file, save it and open it in your browser.',
+  draw:u=>`<div class="win"><div class="bar"><i></i><i></i><i></i>&nbsp; Your AI chat</div><div class="body">
+   <div class="bub me">Widget mode: teach me row reduction</div>
+   <div class="bub ai" style="opacity:${seg(u,.05,.25)}">Here's your lesson: drag the slider to any moment.
+   <div class="mini"><div class="scr">[ 1 &nbsp;2 | 3 ] &nbsp;→&nbsp; −4r₁ + r₂</div><div class="pb"><b>▶</b><div class="track"><span style="width:${100*seg(u,.3,1)}%"></span></div></div></div></div></div></div>`},
+ {name:'Option B: upload the files',dur:8,say:'Option B: upload the files once, then just ask.',note:'Add the .md files as project files / knowledge (Projects, custom GPTs, Gems…) or paste learner-profile.md into custom instructions.',
+  draw:u=>{const F=['quick-start.md','learner-profile.md','modes/widget.md','modes/ultra.md'];let o=`<div class="win"><div class="bar"><i></i><i></i><i></i>&nbsp; Project files / knowledge</div><div class="body"><div class="drop" style="align-items:end;padding-bottom:16px">${u>.8?'<span style="color:var(--ok)">4 files added ✓</span>':'Drop files here'}</div></div></div>`;
+   F.forEach((f,i)=>{const p=seg(u,.1+i*.14,.3+i*.14);const x=lerp(20+i*10,30+(i%2)*165,p),y=lerp(-40,70+Math.floor(i/2)*44,p);o+=`<div class="file" style="left:${x}px;top:${y}px;opacity:${p>0?1:0}">📄 ${f}</div>`});return o}}
+];
+let total=0;S.forEach(s=>{s.start=total;total+=s.dur});
+const sc=document.getElementById('sc');sc.max=total;
+const fmt=s=>{s=Math.max(0,Math.floor(s));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')};
+function render(T){let k=0;while(k<S.length-1&&S[k+1].start<=T)k++;const s=S[k],u=clamp((T-s.start)/s.dur);
+  document.getElementById('stage').innerHTML=s.draw(u);document.getElementById('chip').textContent=`${k+1} / ${S.length} · ${s.name}`;
+  document.getElementById('say').textContent=s.say;document.getElementById('note').textContent=s.note;document.getElementById('cn').textContent=s.name;
+  document.getElementById('tm').textContent=fmt(T)+' / '+fmt(total);document.querySelectorAll('.chaps button').forEach((b,i)=>b.classList.toggle('on',i===k))}
+let T=0,playing=false,last=0,speed=1;const sp=[0.5,0.75,1,1.5],pp=document.getElementById('pp');
+function setPlay(v){playing=v;pp.textContent=v?'Pause':(T>=total-.01?'Replay':'Play');if(v){last=0;requestAnimationFrame(tick)}}
+function tick(ts){if(!playing)return;if(!last)last=ts;T+=(ts-last)/1000*speed;last=ts;if(T>=total){T=total;sc.value=T;render(T);setPlay(false);return}sc.value=T;render(T);requestAnimationFrame(tick)}
+pp.onclick=()=>{if(!playing&&T>=total-.01)T=0;setPlay(!playing)};
+document.getElementById('spd').onclick=e=>{speed=sp[(sp.indexOf(speed)+1)%sp.length];e.target.textContent=speed+'×'};
+sc.addEventListener('input',()=>{T=+sc.value;render(T)});
+const ticks=document.getElementById('ticks'),chaps=document.getElementById('chaps');
+S.forEach((s,i)=>{if(i){const m=document.createElement('i');m.style.left=(s.start/total*100)+'%';ticks.appendChild(m)}const b=document.createElement('button');b.type='button';b.innerHTML=`<b>${fmt(s.start)}</b><span>${s.name}</span>`;b.onclick=()=>{T=s.start+.01;sc.value=T;render(T)};chaps.appendChild(b)});
+render(0);
+</script>
+</body>
+</html>
