@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Teach Me Anything</title>
+<meta name="description" content="Three learning modes for AI tutors: Normal, Widget and Ultra. By Kenzie.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700;800&display=swap">
+<style>
+:root{--bg:#f4f5fa;--card:#fff;--fg:#1d2433;--muted:#5d6678;--line:#dde1ea;--acc:#d0263f;--ln:#2563eb;--tan:#e07a00;--ok:#15803d;--ui:"Figtree",system-ui,-apple-system,sans-serif}
+@media (prefers-color-scheme:dark){:root{--bg:#0e1118;--card:#181d2a;--fg:#e8ebf3;--muted:#a3abbd;--line:#2c3344;--acc:#ff5c7a;--ln:#6ea0ff;--tan:#ffa94d;--ok:#4ade80;color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--ui);line-height:1.55}
+a{color:var(--ln)}
+.wrap{max-width:980px;margin:0 auto;padding:0 20px}
+header{padding:56px 0 28px}
+.tag{display:inline-block;font-size:.8rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--acc);background:color-mix(in srgb,var(--acc) 12%,transparent);padding:4px 12px;border-radius:999px}
+h1{font-size:clamp(2.2rem,6vw,3.6rem);line-height:1.05;margin:14px 0 12px;letter-spacing:-.02em}
+.lead{font-size:1.15rem;color:var(--muted);max-width:640px;margin:0}
+.cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.btn{display:inline-flex;align-items:center;gap:8px;font:inherit;font-weight:700;padding:12px 18px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--fg);text-decoration:none;cursor:pointer;min-height:46px}
+.btn.primary{background:var(--acc);border-color:var(--acc);color:#fff}
+section{padding:28px 0}
+h2{font-size:1.5rem;margin:0 0 14px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media (max-width:760px){.grid{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px}
+.card h3{margin:6px 0 6px;font-size:1.2rem}
+.card .num{font-size:.8rem;font-weight:800;color:var(--muted)}
+.card ul{margin:10px 0 0;padding-left:18px;color:var(--muted)}
+.card.w{border-top:4px solid var(--ln)}.card.n{border-top:4px solid var(--muted)}.card.u{border-top:4px solid var(--acc)}
+.card .goal{font-weight:700}
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;font-size:.95rem}
+th,td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left}
+th{font-size:.82rem;color:var(--muted)}
+.scroll{overflow-x:auto}
+.demos{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:760px){.demos{grid-template-columns:1fr}}
+.demo{display:block;text-decoration:none;color:inherit}
+.demo .card{height:100%}
+.demo .card:hover{border-color:var(--ln)}
+.ideas{counter-reset:i;list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.ideas li{counter-increment:i;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px 12px 52px;position:relative}
+.ideas li::before{content:counter(i);position:absolute;left:14px;top:12px;width:26px;height:26px;border-radius:50%;background:var(--acc);color:#fff;font-weight:800;display:grid;place-items:center;font-size:.85rem}
+pre{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;overflow:auto;max-height:360px;font-size:.82rem;line-height:1.45;white-space:pre-wrap}
+.files{display:grid;gap:8px}
+.files a{display:flex;justify-content:space-between;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;text-decoration:none;color:var(--fg)}
+.files span{color:var(--muted);font-size:.9rem;text-align:right}
+footer{padding:36px 0 50px;color:var(--muted);font-size:.92rem;border-top:1px solid var(--line);margin-top:24px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <span class="tag">For any subject · any AI</span>
+  <h1>Teach Me Anything</h1>
+  <p class="lead">Three learning modes for AI tutors. Paste one file into ChatGPT, Gemini or Claude and it teaches you the way that actually sticks: real numbers first, one idea per step, moving algebra with arrows, and practice that proves you can do it.</p>
+  <div class="cta">
+    <a class="btn primary" href="#quick-start">Get the prompt</a>
+    <a class="btn" href="examples/widget-demo-pointers.html">▶ Watch a demo</a>
+    <a class="btn" href="https://github.com/MyBoyAKS/Teach-Me-Anything">View on GitHub</a>
+  </div>
+</header>
+
+<section>
+  <h2>The three modes</h2>
+  <div class="grid">
+    <div class="card n"><span class="num">MODE 1</span><h3>Normal</h3><div class="goal">Read and fix.</div>
+      <ul><li>Written, step by step in the chat</li><li>Points to the exact wrong line</li><li>What to write next + check numbers</li></ul></div>
+    <div class="card w"><span class="num">MODE 2</span><h3>Widget</h3><div class="goal">Watch and understand.</div>
+      <ul><li>A short "video" you can scrub</li><li>Terms slide, morph and get struck out</li><li>Arrows + highlights on the term being explained</li><li>A graph synced to the same timeline</li></ul></div>
+    <div class="card u"><span class="num">MODE 3</span><h3>Ultra</h3><div class="goal">Prove you can do it.</div>
+      <ul><li>Everything in Widget</li><li>"Pick the next step" puzzles</li><li>Explore lab with sliders</li><li>Your notebook page with ✓ ✗ marks, and a quiz</li></ul></div>
+  </div>
+</section>
+
+<section>
+  <h2>Side by side</h2>
+  <div class="scroll"><table>
+    <tr><th></th><th>Normal</th><th>Widget</th><th>Ultra</th></tr>
+    <tr><td>Where</td><td>chat</td><td>interactive page</td><td>bigger interactive page</td></tr>
+    <tr><td>Moving algebra</td><td>–</td><td>✓</td><td>✓</td></tr>
+    <tr><td>Arrows + highlights</td><td>–</td><td>✓</td><td>✓</td></tr>
+    <tr><td>Synced graph / picture</td><td>small table</td><td>✓</td><td>✓</td></tr>
+    <tr><td>Puzzles</td><td>–</td><td>–</td><td>✓</td></tr>
+    <tr><td>Explore lab</td><td>–</td><td>–</td><td>✓</td></tr>
+    <tr><td>Notebook page</td><td>short</td><td>last chapter</td><td>full, with ✓ ✗</td></tr>
+    <tr><td>Length</td><td>quick read</td><td>1–4 min</td><td>5–8 min + practice</td></tr>
+  </table></div>
+</section>
+
+<section>
+  <h2>See it working</h2>
+  <div class="demos">
+    <a class="demo" href="examples/widget-demo-basic.html"><div class="card"><span class="num">DEMO</span><h3>Equation morph + graph</h3><p style="color:var(--muted);margin:0">Solve 2x + 3 = 7. The lines on the graph move with every step, but always cross at x = 2.</p></div></a>
+    <a class="demo" href="examples/widget-demo-pointers.html"><div class="card"><span class="num">DEMO</span><h3>Arrows on a real homework step</h3><p style="color:var(--muted);margin:0">A Calculus problem where highlights and a curved "put −3a here" arrow show exactly what is happening.</p></div></a>
+  </div>
+</section>
+
+<section>
+  <h2>Why it works</h2>
+  <ol class="ideas">
+    <li><b>Real numbers first.</b> Every idea starts with a concrete example, then the letters come back.</li>
+    <li><b>One idea per step.</b> A short title and 1–2 plain sentences saying why.</li>
+    <li><b>Show every step.</b> Never skip arithmetic.</li>
+    <li><b>Point at it.</b> The term being explained gets a highlight box and an arrow.</li>
+    <li><b>Picture and algebra move together.</b> Every sentence connects to something you can see.</li>
+    <li><b>You do the last step.</b> Hints before answers, and check numbers to test yourself.</li>
+    <li><b>Write it down properly.</b> It always ends with what to write in your notebook.</li>
+  </ol>
+</section>
+
+<section id="quick-start">
+  <h2>Quick start: paste this into any AI</h2>
+  <p style="color:var(--muted);margin-top:0">Fill in your profile at the top, then ask your question and name a mode, e.g. <i>"Widget mode: why is the derivative of x² equal to 2x?"</i></p>
+  <div class="cta" style="margin:0 0 12px"><button class="btn primary" id="copy" type="button">Copy prompt</button><span id="copied" style="align-self:center;color:var(--ok);font-weight:700"></span></div>
+  <pre id="prompt">You are my tutor. Teach me using one of three modes. If I don&#x27;t say which, ask me.
+
+=== MY PROFILE ===
+- Subject: [your subject]
+- I already know: [...]
+- New or shaky for me: [...]
+- Calculator in exams: [yes/no]
+- I mostly use: [phone/laptop]
+- Things that trip me up: [your usual mistakes]
+
+=== RULES FOR EVERY MODE ===
+1. Start with real numbers or my real homework problem, then the letters.
+2. One idea per step: a short title and 1 to 2 plain sentences of WHY.
+3. Show every arithmetic step. Never skip.
+4. Explain new symbols and rules before using them.
+5. Use everyday analogies.
+6. If I say &quot;hint only&quot;, give hints, never the answer.
+7. Never draw ASCII-art diagrams. Use a real drawing, or describe it in words.
+8. End with exactly what I should write in my notebook, plus check numbers.
+
+=== NORMAL MODE ===
+A written explanation in the chat. When checking my work: say what&#x27;s right,
+quote the wrong line and the fix, give the next lines to write, and give check numbers.
+
+=== WIDGET MODE ===
+Make ONE self-contained interactive HTML page that works like a short video:
+- Player: draggable timeline slider, play/pause, speed (0.5x/0.75x/1x/1.5x),
+  time display, chapter ticks and a chapter list. Buttons never move.
+- One &quot;screen&quot;: chapter chip, main sentence ABOVE the maths, the moving maths,
+  a note box BELOW, then a graph/picture with a live readout. Text fades with the slider.
+- Moving maths: each term is a named token. Same token in the next step slides,
+  changed value cross-fades, removed terms get a red strike then fade, new terms fade in.
+- Pointers: when a step talks about a term, put a highlight box around it and an
+  arrow with a short label. For substitutions, draw a curved arrow from source to target.
+- The graph follows the same timeline and can animate.
+- Slow timing: moves ~1.5-2 s, ~5 s to read each step.
+- Last chapter: what to write in my notebook.
+- Real typeset maths (MathJax), works on a phone and in dark mode.
+
+=== ULTRA MODE ===
+Everything in Widget, plus:
+- &quot;Pick the next step&quot; puzzles between chapters (3-4 choices; wrong = hint, not answer).
+- An explore lab with sliders to change the numbers.
+- A notebook page: my answer rebuilt line by line in my writing style,
+  with check marks, crosses and green &quot;write instead&quot; boxes.
+- A short quiz at the end (same skill, new numbers).
+
+If you cannot make interactive pages, write the page as a single .html file I can
+save and open in a browser, or fall back to Normal mode.
+</pre>
+</section>
+
+<section>
+  <h2>The files</h2>
+  <div class="files">
+    <a href="https://github.com/MyBoyAKS/Teach-Me-Anything/blob/main/quick-start.md"><b>quick-start.md</b><span>one paste for any AI</span></a>
+    <a href="https://github.com/MyBoyAKS/Teach-Me-Anything/blob/main/learner-profile.md"><b>learner-profile.md</b><span>template + example profile</span></a>
+    <a href="https://github.com/MyBoyAKS/Teach-Me-Anything/blob/main/modes/normal.md"><b>modes/normal.md</b><span>written mode</span></a>
+    <a href="https://github.com/MyBoyAKS/Teach-Me-Anything/blob/main/modes/widget.md"><b>modes/widget.md</b><span>video mode</span></a>
+    <a href="https://github.com/MyBoyAKS/Teach-Me-Anything/blob/main/modes/ultra.md"><b>modes/ultra.md</b><span>video + practice</span></a>
+    <a href="https://github.com/MyBoyAKS/Teach-Me-Anything/blob/main/widget-engine.md"><b>widget-engine.md</b><span>how to build the video page</span></a>
+  </div>
+</section>
+
+<footer>
+  Created by <b>Kenzie</b> · <a href="https://github.com/MyBoyAKS">@MyBoyAKS</a> · Built with help from Claude (Anthropic).
+</footer>
+</div>
+<script>
+document.getElementById('copy').onclick=async()=>{const t=document.getElementById('prompt').textContent;try{await navigator.clipboard.writeText(t);document.getElementById('copied').textContent='Copied ✓'}catch(e){const r=document.createRange();r.selectNodeContents(document.getElementById('prompt'));const s=getSelection();s.removeAllRanges();s.addRange(r);document.getElementById('copied').textContent='Selected: press Ctrl+C'}};
+</script>
+</body>
+</html>

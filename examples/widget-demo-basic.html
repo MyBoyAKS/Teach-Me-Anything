@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Equation Morph Demo</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700&display=swap">
+<script>
+window.MathJax={svg:{fontCache:'local'},startup:{ready(){MathJax.startup.defaultReady();MathJax.startup.promise.then(()=>{window.__mj=true;window.__boot&&window.__boot()})}}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg-full.js" async></script>
+<style>
+/* One "screen" holds everything the video shows: chapter chip, top text, moving algebra, note, graph with readout. Player bar below. */
+:root{
+  --bg:#eef0f6;--card:#fff;--scr:#fbfcff;--fg:#1d2433;--muted:#5d6678;--line:#d9dde8;--grid:#e8ebf2;--panel:#f7f8fc;
+  --ln:#2563eb;--tan:#e07a00;--ok:#15803d;--bad:#c62828;--bar:#d0263f;--chip:#eceffa;
+  --ui:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0e1118;--card:#181d2a;--scr:#131826;--fg:#e8ebf3;--muted:#a3abbd;--line:#2c3344;--grid:#222838;--panel:#1f2535;
+  --ln:#6ea0ff;--tan:#ffa94d;--ok:#4ade80;--bad:#ff6b6b;--bar:#ff5c7a;--chip:#232a3d;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0e1118;--card:#181d2a;--scr:#131826;--fg:#e8ebf3;--muted:#a3abbd;--line:#2c3344;--grid:#222838;--panel:#1f2535;
+  --ln:#6ea0ff;--tan:#ffa94d;--ok:#4ade80;--bad:#ff6b6b;--bar:#ff5c7a;--chip:#232a3d;color-scheme:dark}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--ui);font-size:15px;line-height:1.45}
+.app{max-width:640px;margin:0 auto;padding:14px 16px 28px;display:flex;flex-direction:column;gap:12px}
+h1{font-size:1.2rem;margin:0;text-wrap:balance}.sub{color:var(--muted);margin:2px 0 0;font-size:.9rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.screen{background:var(--scr);position:relative;padding:10px 0 0}
+.chip{display:inline-block;margin:0 12px;font-size:.72rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);background:var(--chip);border-radius:999px;padding:3px 10px}
+.txt{position:relative;margin:0 14px}
+.txt .tl{position:absolute;inset:0;display:grid;place-items:center;text-align:center;opacity:0;visibility:hidden}
+#say{height:58px;font-weight:700;font-size:1rem}
+#note{height:62px;font-size:.88rem;color:var(--muted)}
+#note .tl{background:color-mix(in srgb,var(--tan) 9%,transparent);border-radius:12px;padding:4px 10px}
+.stage{position:relative;height:178px;overflow:hidden;font-size:clamp(17px,5vw,22px)}
+.stage.tall{height:150px}
+.layer{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:6px 10px;visibility:hidden;pointer-events:none}
+.layer .row{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:2px 3px}
+.vis.full{font-size:.6em;justify-content:center}
+.layer .row>.full{flex-basis:100%;justify-content:center;font-size:.6em}
+.tok{display:inline-flex;align-items:center;padding:2px 2px;border-radius:8px}
+.fr{display:inline-flex;flex-direction:column;align-items:center;margin:0 3px}
+.fr .num,.fr .den{display:flex;align-items:center;justify-content:center}
+.fr .bar{align-self:stretch;height:2px;padding:0;margin:3px 0;background:currentColor;border-radius:1px}
+.vis{position:absolute;left:0;top:0;will-change:transform,opacity;transform-origin:center;display:inline-flex;align-items:center;padding:2px 2px;border-radius:8px}
+.vis.barv{padding:0;height:2px;background:var(--fg);border-radius:1px}
+.vis .stk{position:absolute;left:-1px;right:-1px;top:50%;height:3px;margin-top:-1.5px;background:var(--bad);border-radius:2px;transform-origin:left;transform:scaleX(0) rotate(-8deg)}
+.c-ok{color:var(--ok)}.c-bad{color:var(--bad)}.c-ln{color:var(--ln)}.c-tan{color:var(--tan)}.c-mut{color:var(--muted);font-size:.8em}
+.c-ans{color:var(--ok);background:color-mix(in srgb,var(--ok) 20%,transparent)}
+.gwrap{position:relative;border-top:1px dashed var(--line);margin-top:6px}
+#gr{display:block;width:100%;height:auto;aspect-ratio:400/230}
+.ro.top{top:6px;bottom:auto}
+.ro{position:absolute;right:8px;bottom:8px;font-size:.78rem;font-weight:700;line-height:1.35;background:color-mix(in srgb,var(--scr) 85%,transparent);border:1px solid var(--line);border-radius:10px;padding:5px 8px;font-variant-numeric:tabular-nums;pointer-events:none;max-width:62%}
+.player{border-top:1px solid var(--line);padding:8px 14px 12px;background:var(--panel)}
+.scrub{position:relative;height:30px}
+.ticks{position:absolute;left:0;right:0;top:4px;height:6px;pointer-events:none}
+.ticks i{position:absolute;top:0;width:3px;height:6px;background:var(--muted);border-radius:1px;transform:translateX(-1px)}
+#sc{position:absolute;left:0;right:0;top:8px;width:100%;margin:0;height:22px;accent-color:var(--bar);touch-action:none}
+.pbar{display:grid;grid-template-columns:auto auto 1fr auto;gap:10px;align-items:center;margin-top:6px}
+button{font:inherit;font-weight:700;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--fg);cursor:pointer;touch-action:manipulation;min-height:44px;padding:6px 12px}
+button.main{background:var(--bar);border-color:var(--bar);color:#fff;min-width:5.4em}
+button:focus-visible{outline:2px solid var(--ln);outline-offset:2px}
+.time{font-variant-numeric:tabular-nums;font-weight:700;font-size:.9rem}
+.chapname{font-size:.85rem;font-weight:700;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.chaps{display:grid;gap:6px;padding:10px 14px}
+.chaps button{text-align:left;display:flex;gap:10px;align-items:center;min-height:42px;font-weight:600}
+.chaps button b{font-variant-numeric:tabular-nums;color:var(--bar);min-width:2.6em}
+.chaps button.on{border-color:var(--bar);background:color-mix(in srgb,var(--bar) 10%,var(--card))}
+.hd{padding:10px 14px;border-bottom:1px solid var(--line)}.hd h2{font-size:1rem;margin:0}
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <h1>Tiny demo: equation morph + graph</h1>
+    <p class="sub">Drag the red slider to any moment. The words, the algebra and the graph are all part of the video.</p>
+  </header>
+  <div class="card">
+    <div class="screen">
+      <span class="chip" id="chip"></span>
+      <div class="txt" id="say"></div>
+      <div class="stage" id="stage"></div>
+      <div class="txt" id="note"></div>
+      <div class="gwrap"><svg id="gr" viewBox="0 0 400 230" role="img" aria-label="Two lines whose crossing stays at x = 2"></svg><div class="ro" id="ro"></div></div>
+    </div>
+    <div class="player">
+      <div class="scrub"><div class="ticks" id="ticks"></div><input type="range" id="sc" min="0" max="100" step="0.01" value="0" aria-label="Video position"></div>
+      <div class="pbar">
+        <button type="button" class="main" id="pp">Play</button>
+        <button type="button" id="spd" aria-label="Playback speed">1×</button>
+        <span class="chapname" id="cn"></span>
+        <span class="time" id="tm">0:00 / 0:00</span>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="hd"><h2>Chapters (tap to jump)</h2></div>
+    <div class="chaps" id="chaps"></div>
+  </div>
+</div>
+
+<script>
+(function(){
+const t=(id,tex,c)=>({id,tex,c:c||''});
+const fr=(id,top,bot)=>({frac:true,id,top,bot});
+const E=t('e','=');
+const CH=[
+ {name:'The equation',frames:[
+  {row:[t('a','2x'),t('p','+'),t('b','3'),E,t('c','7')],say:'Tiny demo: solve 2x + 3 = 7.',note:'Graph: blue line y = left side, orange line y = right side. The answer is where they cross.',hold:6,g:{s:[0,0],d:[1,1]}}
+ ]},
+ {name:'Move the 3',frames:[
+  {row:[t('a','2x'),E,t('c','7'),t('m','-'),t('b','3')],say:'Move +3 to the other side: it becomes −3.',note:'Watch the graph: BOTH lines drop by 3, but the crossing stays at x = 2.',hold:6.5,g:{s:[0,3],d:[1,1]}},
+  {row:[t('a','2x'),E,t('c','4')],say:'7 − 3 = 4.',note:'The struck terms fade; 7 morphs into 4.',hold:5.5,g:{s:[3,3],d:[1,1]}}
+ ]},
+ {name:'Divide by 2',frames:[
+  {row:[t('a','x'),E,t('c','2','c-ans')],say:'Divide both sides by 2.',note:'Both lines squash down, but the crossing STILL sits at x = 2. Algebra steps never move the answer.',hold:8,g:{s:[3,3],d:[1,2],hit:1}}
+ ]}
+];
+const TR=2.0;
+const F=[];CH.forEach((c,ci)=>c.frames.forEach(f=>{f.ch=ci;F.push(f)}));
+let total=0;F.forEach((f,k)=>{f.tr=k?TR:0;f.start=total;f.dur=f.tr+f.hold;total+=f.dur});
+CH.forEach(c=>c.start=c.frames[0].start);
+const stage=document.getElementById('stage'),sayEl=document.getElementById('say'),noteEl=document.getElementById('note'),sc=document.getElementById('sc');
+sc.max=total.toFixed(2);
+const mj=tex=>window.__mj?MathJax.tex2svg(tex,{display:false}):Object.assign(document.createElement('span'),{textContent:tex});
+let layers=[],vis=[],pos=[],sayL=[],noteL=[];
+function build(){
+  stage.innerHTML='';sayEl.innerHTML='';noteEl.innerHTML='';layers=[];vis=[];sayL=[];noteL=[];
+  F.forEach((f,k)=>{
+    const ly=document.createElement('div');ly.className='layer';const row=document.createElement('div');row.className='row';ly.appendChild(row);
+    const vk={};
+    const addTok=(tk,parent)=>{const s=document.createElement('span');s.className='tok '+tk.c;s.dataset.id=tk.id;const m=mj(tk.tex);s.appendChild(m);parent.appendChild(s);
+      const v=document.createElement('span');v.className='vis '+tk.c;v.appendChild(m.cloneNode(true));const st=document.createElement('span');st.className='stk';v.appendChild(st);v.style.opacity=0;v.style.visibility='hidden';stage.appendChild(v);vk[tk.id]={el:v,stk:st,tex:tk.tex}};
+    f.row.forEach(it=>{
+      if(it.frac){const w=document.createElement('span');w.className='fr';const n=document.createElement('span');n.className='num';const b=document.createElement('span');b.className='tok bar';b.dataset.id=it.id+'_bar';const d=document.createElement('span');d.className='den';
+        w.append(n,b,d);row.appendChild(w);it.top.forEach(tk=>addTok(tk,n));it.bot.forEach(tk=>addTok(tk,d));
+        const v=document.createElement('span');v.className='vis barv';const st=document.createElement('span');st.className='stk';v.appendChild(st);v.style.opacity=0;v.style.visibility='hidden';stage.appendChild(v);vk[it.id+'_bar']={el:v,stk:st,tex:'bar',bar:true};
+      }else addTok(it,row)});
+    stage.appendChild(ly);layers.push(ly);vis.push(vk);
+    const a=document.createElement('div');a.className='tl';a.innerHTML='<span>'+f.say+'</span>';sayEl.appendChild(a);sayL.push(a);
+    const b=document.createElement('div');b.className='tl';b.innerHTML='<span>'+f.note+'</span>';noteEl.appendChild(b);noteL.push(b);
+  });
+  if(window.__mj)MathJax.typesetPromise([sayEl,noteEl]).catch(()=>{});
+  measure();
+}
+function measure(){pos=layers.map(ly=>{const m={};ly.querySelectorAll('.tok').forEach(s=>{m[s.dataset.id]={x:s.offsetLeft,y:s.offsetTop,w:s.offsetWidth,h:s.offsetHeight}});return m});
+  vis.forEach((vk,k)=>{for(const id in vk){const v=vk[id];if(v.el.classList.contains('full')&&pos[k][id])v.el.style.width=pos[k][id].w+'px'}})}
+const clamp=v=>Math.max(0,Math.min(1,v)),ease=p=>p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2,lerp=(a,b,p)=>a+(b-a)*p;
+function place(v,x,y,o,s,w){v.el.style.visibility=o>0.01?'visible':'hidden';v.el.style.opacity=o;v.el.style.transform=`translate(${x}px,${y}px) scale(${s})`;if(v.bar&&w!==undefined)v.el.style.width=w+'px'}
+let shown=new Set();
+function fadeText(arr,k,p,same){arr.forEach((el,i)=>{let o=0;if(i===k)o=(p>=1||same)?1:clamp((p-0.5)/0.5);else if(i===k-1&&p<1&&!same)o=1-clamp(p/0.5);el.style.opacity=o;el.style.visibility=o>0.01?'visible':'hidden'})}
+function render(T){
+  let k=0;while(k<F.length-1&&F[k+1].start<=T)k++;
+  const f=F[k],local=T-f.start,p=f.tr?clamp(local/f.tr):1,ep=ease(p);
+  const now=new Set();
+  if(p<1&&k>0){
+    const A=vis[k-1],B=vis[k],PA=pos[k-1],PB=pos[k];
+    for(const id in A){const a=A[id];now.add(a.el);
+      if(B[id]){
+        if(a.bar){place(a,lerp(PA[id].x,PB[id].x,ep),lerp(PA[id].y,PB[id].y,ep),1,1,lerp(PA[id].w,PB[id].w,ep));continue}
+        const same=B[id].tex===a.tex;const x=lerp(PA[id].x,PB[id].x+(PB[id].w-PA[id].w)/2,ep),y=lerp(PA[id].y,PB[id].y+(PB[id].h-PA[id].h)/2,ep);place(a,x,y,same?1:1-ep,1);a.stk.style.transform='scaleX(0) rotate(-8deg)'}
+      else{place(a,PA[id].x,PA[id].y,1-clamp((p-0.45)/0.4),1,PA[id].w);a.stk.style.transform=a.bar?'scaleX(0)':`scaleX(${clamp(p/0.45)}) rotate(-8deg)`}}
+    for(const id in B){const b=B[id];now.add(b.el);b.stk.style.transform='scaleX(0) rotate(-8deg)';
+      if(A[id]){if(b.bar){b.el.style.visibility='hidden';b.el.style.opacity=0;now.delete(b.el);continue}
+        const same=A[id].tex===b.tex;const x=lerp(PA[id].x-(PB[id].w-PA[id].w)/2,PB[id].x,ep),y=lerp(PA[id].y-(PB[id].h-PA[id].h)/2,PB[id].y,ep);place(b,x,y,same?0:ep,1)}
+      else{const q=clamp((p-0.45)/0.55);place(b,PB[id].x,PB[id].y,q,0.6+0.4*q,PB[id].w)}}
+  }else{const B=vis[k],PB=pos[k];for(const id in B){const b=B[id];now.add(b.el);b.stk.style.transform='scaleX(0) rotate(-8deg)';place(b,PB[id].x,PB[id].y,1,1,PB[id].w)}}
+  shown.forEach(el=>{if(!now.has(el)){el.style.visibility='hidden';el.style.opacity=0}});shown=now;
+  const prev=k>0?F[k-1]:null;
+  fadeText(sayL,k,p,prev&&prev.say===f.say);fadeText(noteL,k,p,prev&&prev.note===f.note);
+  const g=f.g||{},u=clamp(local/f.dur);drawG(g,u);
+  const ci=f.ch;document.getElementById('cn').textContent=CH[ci].name;document.getElementById('chip').textContent=CH[ci].name;
+  document.querySelectorAll('.chaps button').forEach((b,i)=>b.classList.toggle('on',i===ci));
+  document.getElementById('tm').textContent=fmt(T)+' / '+fmt(total);
+}
+const fmt=s=>{s=Math.max(0,Math.floor(s));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')};
+// graph: y = (2x + 3 - s)/d (blue) and y = (7 - s)/d (orange)
+function drawG(g,u){
+  const W=400,H=230,X0=-1,X1=4,Y0=-1.5,Y1=9;
+  const px=v=>(v-X0)/(X1-X0)*W,py=v=>H-(v-Y0)/(Y1-Y0)*H;
+  const k=Math.min(1,u*3),e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;
+  const s0=g.s[0]+(g.s[1]-g.s[0])*e,d0=g.d[0]+(g.d[1]-g.d[0])*e;
+  const f=x=>(2*x+3-s0)/d0,h=(7-s0)/d0;
+  let o='';
+  for(let v=0;v<=4;v++)o+=`<line x1="${px(v)}" x2="${px(v)}" y1="0" y2="${H}" stroke="var(--grid)"/><text x="${px(v)}" y="${py(0)+13}" text-anchor="middle" font-size="10" fill="var(--muted)">${v}</text>`;
+  for(let v=2;v<=8;v+=2)o+=`<line x1="0" x2="${W}" y1="${py(v)}" y2="${py(v)}" stroke="var(--grid)"/><text x="${px(0)+4}" y="${py(v)-3}" font-size="10" fill="var(--muted)">${v}</text>`;
+  o+=`<line x1="0" x2="${W}" y1="${py(0)}" y2="${py(0)}" stroke="var(--fg)"/><line x1="${px(0)}" x2="${px(0)}" y1="0" y2="${H}" stroke="var(--fg)"/>`;
+  o+=`<line x1="${px(X0)}" y1="${py(f(X0))}" x2="${px(X1)}" y2="${py(f(X1))}" stroke="var(--ln)" stroke-width="3.5"/>`;
+  o+=`<line x1="0" x2="${W}" y1="${py(h)}" y2="${py(h)}" stroke="var(--tan)" stroke-width="3.5"/>`;
+  o+=`<line x1="${px(2)}" x2="${px(2)}" y1="${py(0)}" y2="${py(h)}" stroke="var(--ok)" stroke-width="2" stroke-dasharray="4 4"/>`;
+  o+=`<circle cx="${px(2)}" cy="${py(h)}" r="7" fill="var(--ok)" stroke="var(--scr)" stroke-width="2"/>`;
+  if(g.hit)o+=`<text x="${px(2)+10}" y="${py(h)-10}" font-size="12" font-weight="700" fill="var(--ok)">x = 2</text>`;
+  const lb=d0>1.5?'x':(s0>1.5?'2x':'2x + 3'),rb=(7-s0)/d0;
+  const ro=`<span class="c-ln">blue: y = ${lb}</span><br><span class="c-tan">orange: y = ${+rb.toFixed(2)}</span><br>cross at <b class="c-ok">x = 2</b> every step`;
+  document.getElementById('gr').innerHTML=o;const el=document.getElementById('ro');el.classList.remove('top');if(d0>1.4){el.style.left='22%';el.style.top='4%';el.style.right='auto';el.style.bottom='auto'}else{el.style.right='2%';el.style.bottom='2%';el.style.left='auto';el.style.top='auto'}el.innerHTML=ro;el.style.visibility='visible';
+}
+// player
+let T=0,playing=false,last=0,speed=1;const speeds=[0.5,0.75,1,1.5];
+const pp=document.getElementById('pp');
+function setPlay(v){playing=v;pp.textContent=v?'Pause':(T>=total-0.01?'Replay':'Play');if(v){last=0;requestAnimationFrame(tick)}}
+function tick(ts){if(!playing)return;if(!last)last=ts;T+=(ts-last)/1000*speed;last=ts;if(T>=total){T=total;sc.value=T;render(T);setPlay(false);return}sc.value=T;render(T);requestAnimationFrame(tick)}
+pp.onclick=()=>{if(!playing&&T>=total-0.01)T=0;setPlay(!playing)};
+document.getElementById('spd').onclick=e=>{speed=speeds[(speeds.indexOf(speed)+1)%speeds.length];e.target.textContent=speed+'×'};
+sc.addEventListener('input',()=>{T=+sc.value;render(T);if(!playing)pp.textContent=T>=total-0.01?'Replay':'Play'});
+const ticks=document.getElementById('ticks'),chaps=document.getElementById('chaps');
+CH.forEach((c,i)=>{if(i){const m=document.createElement('i');m.style.left=(c.start/total*100)+'%';ticks.appendChild(m)}
+  const b=document.createElement('button');b.type='button';b.innerHTML=`<b>${fmt(c.start)}</b><span>${c.name}</span>`;b.onclick=()=>{T=c.start+(i?TR:0);sc.value=T;render(T)};chaps.appendChild(b)});
+window.addEventListener('resize',()=>{measure();render(T)});
+let booted=false;
+function boot(){if(booted)return;booted=true;build();requestAnimationFrame(()=>{measure();render(0)})}
+window.__boot=boot;if(window.__mj)boot();
+setTimeout(()=>{if(!booted){booted=true;build();measure();render(0)}},6000);
+})();
+</script>
+</body>
+</html>
