@@ -85,20 +85,20 @@ function cursor(x,y){return `<div class="cursor" style="left:${x}px;top:${y}px">
 function ripple(x,y,u){if(u<=0||u>=1)return '';const r=8+u*26;return `<div class="ripple" style="left:${x-r}px;top:${y-r}px;width:${2*r}px;height:${2*r}px;opacity:${1-u}"></div>`}
 const typed=(s,u)=>s.slice(0,Math.round(s.length*clamp(u)));
 const S=[
- {name:'Download the ZIP',dur:6,say:'Step 1: on the GitHub page, click "Download ZIP".',note:'It is the green button near the top of the README. You get Teach-Me-Anything-main.zip.',
+ {name:'Download the ZIP',dur:6,say:'Step 1: on the GitHub page, click "Download AI pack".',note:'It is the green button in the DOWNLOAD section. You get a small ZIP with only the .md files the AI needs.',
   draw:u=>{const bx=24,by=118,cx=lerp(320,bx+70,seg(u,.1,.45)),cy=lerp(250,by+16,seg(u,.1,.45));
    return `<div class="win"><div class="bar"><i></i><i></i><i></i>&nbsp; GitHub · Teach-Me-Anything</div><div class="body">
    <div style="font-weight:800;font-size:1.15rem">Teach Me Anything</div><div style="color:var(--muted);font-size:.78rem;margin:2px 0 10px">Three learning modes for AI tutors.</div></div></div>
-   <div class="btn" style="position:absolute;left:${bx}px;top:${by}px;background:#2ea043;border-color:#2ea043;color:#fff">⬇ Download ZIP</div>
+   <div class="btn" style="position:absolute;left:${bx}px;top:${by}px;background:#2ea043;border-color:#2ea043;color:#fff">⬇ Download AI pack</div>
    ${u>.5&&u<.68?ripple(bx+70,by+16,(u-.5)/.18):''}
-   ${u>.6?`<div class="file" style="left:40px;top:200px;opacity:${seg(u,.6,.75)}">🗜️ Teach-Me-Anything-main.zip &nbsp;<span style="color:var(--ok)">downloaded ✓</span></div>`:''}${cursor(cx,cy)}`}},
+   ${u>.6?`<div class="file" style="left:40px;top:200px;opacity:${seg(u,.6,.75)}">🗜️ Teach-Me-Anything-AI-pack.zip &nbsp;<span style="color:var(--ok)">downloaded ✓</span></div>`:''}${cursor(cx,cy)}`}},
  {name:'Unzip it',dur:7,say:'Step 2: unzip it (right-click → Extract All).',note:'On a phone, open it in your Files app and tap Extract. You get a folder with the .md files inside.',
-  draw:u=>{const files=['START-HERE.md','quick-start.md','learner-profile.md','modes/','examples/'];let o=`<div class="win"><div class="bar"><i></i><i></i><i></i>&nbsp; Downloads</div><div class="body">
-   <div class="file" style="position:static;display:inline-flex">🗜️ Teach-Me-Anything-main.zip</div>`;
+  draw:u=>{const files=['START-HERE.md','quick-start.md','learner-profile.md','modes/','widget-engine.md'];let o=`<div class="win"><div class="bar"><i></i><i></i><i></i>&nbsp; Downloads</div><div class="body">
+   <div class="file" style="position:static;display:inline-flex">🗜️ Teach-Me-Anything-AI-pack.zip</div>`;
    if(u>.2&&u<.5)o+=`<div style="position:absolute;left:60px;top:44px;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:4px 0;font-size:.78rem;box-shadow:0 4px 12px rgba(0,0,0,.2)"><div style="padding:4px 12px">Open</div><div style="padding:4px 12px;background:color-mix(in srgb,var(--ln) 20%,transparent);font-weight:700">Extract All…</div><div style="padding:4px 12px">Delete</div></div>`;
-   if(u>=.5){o+=`<div style="margin-top:10px;font-weight:700;font-size:.8rem">📁 Teach-Me-Anything-main</div>`;files.forEach((f,i)=>{const p=seg(u,.52+i*.07,.62+i*.07);o+=`<div style="margin:4px 0 0 18px;font-size:.78rem;opacity:${p}">${f.endsWith('/')?'📁':'📄'} ${f}</div>`})}
+   if(u>=.5){o+=`<div style="margin-top:10px;font-weight:700;font-size:.8rem">📁 Teach-Me-Anything-AI-pack</div>`;files.forEach((f,i)=>{const p=seg(u,.52+i*.07,.62+i*.07);o+=`<div style="margin:4px 0 0 18px;font-size:.78rem;opacity:${p}">${f.endsWith('/')?'📁':'📄'} ${f}</div>`})}
    return o+`</div></div>${cursor(lerp(300,110,seg(u,.05,.2)),lerp(240,30,seg(u,.05,.2))+(u>.3?28:0))}`}},
- {name:'Give everything to the AI',dur:7,say:'Step 3: drag all the files into a new chat with your AI, then send "Start".',note:'Attach the files (or the ZIP itself, if your AI accepts ZIPs). START-HERE.md tells the AI what to do.',
+ {name:'Give everything to the AI',dur:7,say:'Step 3: drag all the files into a new chat with your AI, then send "Start".',note:'Attach the .md files from the AI pack. START-HERE.md tells the AI what to do.',
   draw:u=>{const F=['START-HERE.md','quick-start.md','modes/widget.md','modes/ultra.md'];let o=`<div class="win"><div class="bar"><i></i><i></i><i></i>&nbsp; Your AI chat</div><div class="body"><div style="color:var(--muted);text-align:center;margin-top:30px;font-weight:700">How can I help you today?</div>
    <div class="input" style="min-height:96px">${u>.75?typed('Start',seg(u,.75,.88)):'<span style="color:var(--muted)">Message…</span>'}</div><div class="send">↑</div></div></div>`;
    F.forEach((f,i)=>{const p=seg(u,.05+i*.13,.25+i*.13);const x=lerp(40+i*20,26+(i%2)*150,p),y=lerp(40,212+Math.floor(i/2)*26,p);o+=`<div class="file" style="left:${x}px;top:${y}px;opacity:${p>0?1:0};padding:3px 8px">📄 ${f}</div>`});

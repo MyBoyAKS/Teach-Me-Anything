@@ -75,21 +75,25 @@ Full specs: [`modes/normal.md`](modes/normal.md) · [`modes/widget.md`](modes/wi
 ## 5. DOWNLOAD
 
 <p align="center">
-  <a href="https://github.com/MyBoyAKS/Teach-Me-Anything/archive/refs/heads/main.zip"><img src="https://img.shields.io/badge/Download%20ZIP-2ea043?style=for-the-badge&logo=github&logoColor=white" alt="Download ZIP" height="42"></a>
+  <a href="https://github.com/MyBoyAKS/Teach-Me-Anything/raw/main/Teach-Me-Anything-AI-pack.zip"><img src="https://img.shields.io/badge/Download%20AI%20pack%20(.zip)-2ea043?style=for-the-badge&logo=github&logoColor=white" alt="Download AI pack" height="42"></a>
 </p>
+<p align="center"><sub>The <b>AI pack</b> is tiny (about 14 KB, only the .md files the AI needs), so it uploads fully every time.<br>Want everything, including the GIFs and demo pages? <a href="https://github.com/MyBoyAKS/Teach-Me-Anything/archive/refs/heads/main.zip">Download the full repo ZIP</a> (about 4 MB, not for uploading to an AI).</sub></p>
 
 <p align="center"><img src="assets/tutorial.gif" width="340" alt="Tutorial: download the ZIP, unzip, give the files to your AI, answer its questions, get your lesson"></p>
 
 ### Option A: give everything to the AI (recommended)
-1. **Download:** click the green **Download ZIP** button above. You get `Teach-Me-Anything-main.zip`.
+1. **Download:** click the green **Download AI pack** button above. You get `Teach-Me-Anything-AI-pack.zip`.
 2. **Unzip:** right-click the file → **Extract All** (Windows) or double-click it (Mac). On a phone, open it in your Files app and tap **Extract**.
-3. **Give it to your AI:** open a new chat and drag in all the files from the folder (or the ZIP itself, if your AI accepts ZIPs). Then send **`Start`**.
+3. **Give it to your AI:** open a new chat and drag in all the **.md files** from the folder. Then send **`Start`**.
 4. **Answer the AI:** it reads `START-HERE.md` and asks you:
    - what subject you're studying,
    - what you already know well,
    - what usually trips you up,
    - what you want to learn first, and which mode (**Normal**, **Widget** or **Ultra**).
 5. **Learn:** it builds your lesson in the mode you picked.
+
+> [!IMPORTANT]
+> Upload the **AI pack** (or the .md files), not the full repo ZIP. The full ZIP is mostly GIFs and can get cut off during upload, so the AI ends up missing files.
 
 > [!TIP]
 > Using Claude? Put the files in a **Project** once, and every new chat in that project already knows the method.

@@ -25,6 +25,8 @@ Do **not** teach yet. Greet the learner in one short line, then ask only:
 
 Keep their answers as their learner profile for the rest of the chat.
 
+If you already know this learner (from memory or a project), don't skip silently: show what you know in 2 to 3 lines and ask them to confirm or correct it, then ask question 4.
+
 ## 3. Then teach
 - Follow the rules in `quick-start.md` for every answer.
 - Use the mode they chose. If they don't say, ask.
