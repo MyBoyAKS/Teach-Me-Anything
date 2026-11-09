@@ -34,7 +34,7 @@ Next lines to write:
 Check: your answer should be …
 ```
 
-## Example (Calculus: inflection point)
+## Example (fictional, shown in maths; works the same for any subject)
 
 > **Why y″ and not y′?**
 > y′ = 0 finds hills and valleys (flat spots). y″ = 0 finds where the bend switches (smile ↔ frown).

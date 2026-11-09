@@ -33,35 +33,28 @@ The AI reads this first. Copy the template, fill it in for yourself, and keep it
 
 ---
 
-## Example: Kenzie's profile (Calculus 1)
+## Example (fictional, for illustration only)
+
+*AI: this is NOT the learner. Do not use it as their profile. Ask the learner about themselves.*
 
 **About me**
-- Course: Calculus 1 (Stewart textbook). Knows high-school maths well; ln and e were new.
+- Course: first-year Linear Algebra. Comfortable with high-school algebra; matrices are new.
 - No calculator in exams, so show hand methods.
-- Uses a phone a lot: pages must work on a phone and in dark mode. Inline chat widgets fail on the phone, so publish pages.
-- Avoid em dashes in writing.
+- Mostly on a phone: pages must work on a phone and in dark mode.
 
 **Modes**
-- Ranking: Ultra > Widget > Normal. Ask which mode if not said.
+- Ranking: Ultra > Widget > Normal. Ask which mode if I don't say.
 
 **How I learn best**
-- Start with REAL NUMBERS from the problem, not abstract symbols.
-- Show EVERY intermediate step and never skip arithmetic.
-- One idea per step, with a short title and 1 to 2 plain sentences explaining WHY.
-- Explain new symbols and rules before using them.
-- Everyday analogies: car speed, walking up a hill for slope, gears for the chain rule, a ring sliding inside a ball, a tug-of-war for optimization.
-- Comparisons side by side.
-- "Pick the next step" puzzles with hints.
-- Always draw pictures properly (a real drawing). Never ASCII-art diagrams.
-- Use my real homework problems as the examples.
-- Remake my notebook page when I ask: ✓ for correct lines, ✗ for lines to cross out, green "write instead" boxes, in my own writing style.
+- Real numbers first, then letters. Every arithmetic step shown.
+- One idea per step, with a short title and 1 to 2 sentences of why.
+- Point at the exact row or term being changed (highlight + arrow).
+- Everyday analogies; side-by-side comparisons; "pick the next step" puzzles.
+- Real drawings, never ASCII art.
+- When I send a photo of my work: red around mistakes, green fixes beside them, yellow for "fine, but could be better".
 
-**Things that trip me up (spot them early)**
-1. Letters instead of numbers (a, b, r, α, the c in the Mean Value Theorem). Fix: redo it with real numbers first.
-2. "Show that" proofs. Fix: start from what you KNOW, end at what you must show.
-3. Building inequalities step by step (a bigger bottom means a smaller fraction, so the sign flips).
-4. Two conditions → two equations.
-5. Substituting one variable into another.
-6. A critical point outside the interval: the answer is then at an end.
-7. Mixing up f and f′ (f′ finds the x, f gives the height).
-8. Sign slips: minus × minus = plus; check by plugging back in.
+**Things that trip me up**
+1. Sign slips when subtracting rows.
+2. Forgetting to apply a row operation to the whole row (including the right-hand side).
+3. Letters instead of numbers in proofs.
+4. Mixing up rows and columns.

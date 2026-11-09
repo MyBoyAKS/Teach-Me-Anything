@@ -68,7 +68,18 @@ This repo is the result: the prompt, the three modes, and the rules behind them,
 
 <p align="center"><img src="assets/mode-widget.gif" width="340" alt="Widget mode: moving algebra with arrows and a synced graph"></p>
 
-Full specs: [`modes/normal.md`](modes/normal.md) · [`modes/widget.md`](modes/widget.md) · [`modes/ultra.md`](modes/ultra.md) · Research behind the modes: [`evidence.md`](evidence.md)
+### Bonus: annotate my work (works in every mode)
+Stuck? Send a photo of what you wrote. The AI marks it up like a teacher:
+
+- 🔴 **Red** circle or box: wrong, with a short reason
+- 🟢 **Green** right beside it: the corrected version
+- 🟡 **Yellow** box: not wrong, but could be better (with the option)
+
+If the AI seems to be explaining in circles, it will ask you for a photo, because the mistake is usually in one line.
+
+<p align="center"><img src="assets/annotate-demo.gif" width="420" alt="Annotate: yellow suggestion, red circle on the wrong sign, green fix beside it"></p>
+
+Full specs: [`modes/normal.md`](modes/normal.md) · [`modes/widget.md`](modes/widget.md) · [`modes/ultra.md`](modes/ultra.md) · [`modes/annotate.md`](modes/annotate.md) · Research behind the modes: [`evidence.md`](evidence.md)
 
 ---
 
@@ -77,14 +88,14 @@ Full specs: [`modes/normal.md`](modes/normal.md) · [`modes/widget.md`](modes/wi
 <p align="center">
   <a href="https://github.com/MyBoyAKS/Teach-Me-Anything/raw/main/Teach-Me-Anything-AI-pack.zip"><img src="https://img.shields.io/badge/Download%20AI%20pack%20(.zip)-2ea043?style=for-the-badge&logo=github&logoColor=white" alt="Download AI pack" height="42"></a>
 </p>
-<p align="center"><sub>The <b>AI pack</b> is tiny (about 14 KB, only the .md files the AI needs), so it uploads fully every time.<br>Want everything, including the GIFs and demo pages? <a href="https://github.com/MyBoyAKS/Teach-Me-Anything/archive/refs/heads/main.zip">Download the full repo ZIP</a> (about 4 MB, not for uploading to an AI).</sub></p>
+<p align="center"><sub>The <b>AI pack</b> is tiny (about 20 KB, only the .md files the AI needs), so it uploads fully every time.<br>Want everything, including the GIFs and demo pages? <a href="https://github.com/MyBoyAKS/Teach-Me-Anything/archive/refs/heads/main.zip">Download the full repo ZIP</a> (about 4 MB, not for uploading to an AI).</sub></p>
 
 <p align="center"><img src="assets/tutorial.gif" width="340" alt="Tutorial: download the ZIP, unzip, give the files to your AI, answer its questions, get your lesson"></p>
 
 ### Option A: give everything to the AI (recommended)
 1. **Download:** click the green **Download AI pack** button above. You get `Teach-Me-Anything-AI-pack.zip`.
 2. **Unzip:** right-click the file → **Extract All** (Windows) or double-click it (Mac). On a phone, open it in your Files app and tap **Extract**.
-3. **Give it to your AI:** open a new chat and drag in all the **.md files** from the folder. Then send **`Start`**.
+3. **Give it to your AI:** open a new chat and drag in all the files from the folder (the .md files, plus `annotate.py` if your AI accepts it). Then send **`Start`**.
 4. **Answer the AI:** it reads `START-HERE.md` and asks you:
    - what subject you're studying,
    - what you already know well,
@@ -109,6 +120,9 @@ Don't want to download a ZIP from a stranger? Fair. Every file is plain text, so
 | [`modes/normal.md`](modes/normal.md) | Normal mode spec | [⬇ download](https://github.com/MyBoyAKS/Teach-Me-Anything/raw/main/modes/normal.md) |
 | [`modes/widget.md`](modes/widget.md) | Widget mode spec | [⬇ download](https://github.com/MyBoyAKS/Teach-Me-Anything/raw/main/modes/widget.md) |
 | [`modes/ultra.md`](modes/ultra.md) | Ultra mode spec | [⬇ download](https://github.com/MyBoyAKS/Teach-Me-Anything/raw/main/modes/ultra.md) |
+| [`modes/annotate.md`](modes/annotate.md) | red / green / yellow marking of your work | [⬇ download](https://github.com/MyBoyAKS/Teach-Me-Anything/raw/main/modes/annotate.md) |
+| [`skills/annotate-mistakes/SKILL.md`](skills/annotate-mistakes/SKILL.md) | annotate skill (Claude skill format) | [⬇ download](https://github.com/MyBoyAKS/Teach-Me-Anything/raw/main/skills/annotate-mistakes/SKILL.md) |
+| [`skills/annotate-mistakes/annotate.py`](skills/annotate-mistakes/annotate.py) | draws the marks on your photo | [⬇ download](https://github.com/MyBoyAKS/Teach-Me-Anything/raw/main/skills/annotate-mistakes/annotate.py) |
 | [`widget-engine.md`](widget-engine.md) | how to build the interactive page | [⬇ download](https://github.com/MyBoyAKS/Teach-Me-Anything/raw/main/widget-engine.md) |
 | [`evidence.md`](evidence.md) | the research behind it | [⬇ download](https://github.com/MyBoyAKS/Teach-Me-Anything/raw/main/evidence.md) |
 
