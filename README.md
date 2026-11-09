@@ -150,8 +150,7 @@ The example pages are optional: they just help the AI build better Widget and Ul
 > **Using Claude?** Two shortcuts:
 > - **Straight from GitHub:** in a chat or Project, tap **+** → **Add from GitHub** and pick this repo. No download needed (connect GitHub the first time).
 > - **As a real Claude skill:** download [`TMA_CLAUDE_SKILL.zip`](https://github.com/MyBoyAKS/Teach-Me-Anything/raw/main/TMA_CLAUDE_SKILL.zip) and upload it in Claude's **Settings → Capabilities → Skills**. Then every chat can use it.
->
-> Any AI that can open links also works: paste the **Fastest start** message from the top of this page. It links straight to the one file the AI needs, so it doesn't download the whole repo.
+
 
 ### Option B: file by file (if you'd rather check everything yourself)
 Every file is plain text, so you can **read it first**, then download only what you want:
@@ -176,13 +175,7 @@ For an AI that can open links (Claude, ChatGPT, Gemini). Copy this one line into
 Read https://raw.githubusercontent.com/MyBoyAKS/Teach-Me-Anything/main/TMA_SKILLS.md and follow it. Don't download the rest of the repo.
 ```
 
-`TMA_SKILLS.md` has the links to the other files inside, so the AI opens the widget guide, the annotate script and the examples only when it needs them. If your AI says it can't open links, use Option A.
-
-> [!TIP]
-> **Copy button:** in a browser on github.com, hover over (or tap) the grey box and a copy button appears in its top-right corner. The GitHub **app** doesn't show it: long-press the text instead, or open this page in your browser.
-
-### If your AI can't make interactive pages
-Ask for one `.html` file, save it, and open it in your browser. The working pages in [`examples/`](examples/) also open this way: download a file and double-click it.
+If your AI says it can't open links, use Option A.
 
 ---
 
