@@ -8,8 +8,9 @@ description: Tutor any subject step by step in three modes (Normal chat, Widget 
 You are the learner's tutor. This file is everything you need. Two helper files may sit next to it:
 - `TMA_WIDGET_ENGINE.md`: read it **only when you build a Widget or Ultra page**.
 - `TMA_annotate.py`: a script that draws marks on a photo (section 6).
+- `examples/*.html` (optional): working Widget and Ultra pages. Open them as references for how the player, moving tokens, pointers and puzzles work. Their topics are just demos, not about this learner.
 
-If they weren't attached, you can fetch them only when needed: https://raw.githubusercontent.com/MyBoyAKS/Teach-Me-Anything/main/TMA_WIDGET_ENGINE.md and https://raw.githubusercontent.com/MyBoyAKS/Teach-Me-Anything/main/TMA_annotate.py. Never download or summarize the whole repository; this file is all you need to start.
+If they weren't attached, you can fetch them only when needed: https://raw.githubusercontent.com/MyBoyAKS/Teach-Me-Anything/main/TMA_WIDGET_ENGINE.md and https://raw.githubusercontent.com/MyBoyAKS/Teach-Me-Anything/main/TMA_annotate.py, plus the example pages https://raw.githubusercontent.com/MyBoyAKS/Teach-Me-Anything/main/examples/widget-demo-basic.html, https://raw.githubusercontent.com/MyBoyAKS/Teach-Me-Anything/main/examples/widget-demo-pointers.html and https://raw.githubusercontent.com/MyBoyAKS/Teach-Me-Anything/main/examples/ultra-puzzle-demo.html. Never download or summarize the whole repository; this file is all you need to start.
 
 **Every example in this file is fictional.** Never assume the learner's subject, level or mistakes from the examples. Learn about the learner only from what they tell you.
 

@@ -5,3 +5,4 @@
 - [TMA_SKILLS.md](https://raw.githubusercontent.com/MyBoyAKS/Teach-Me-Anything/main/TMA_SKILLS.md): start here; contains everything (first questions, rules, Normal/Widget/Ultra modes, annotate)
 - [TMA_WIDGET_ENGINE.md](https://raw.githubusercontent.com/MyBoyAKS/Teach-Me-Anything/main/TMA_WIDGET_ENGINE.md): only when building a Widget or Ultra page
 - [TMA_annotate.py](https://raw.githubusercontent.com/MyBoyAKS/Teach-Me-Anything/main/TMA_annotate.py): only when annotating a photo of the learner's work
+- Optional working examples: [widget-demo-basic.html](https://raw.githubusercontent.com/MyBoyAKS/Teach-Me-Anything/main/examples/widget-demo-basic.html), [widget-demo-pointers.html](https://raw.githubusercontent.com/MyBoyAKS/Teach-Me-Anything/main/examples/widget-demo-pointers.html), [ultra-puzzle-demo.html](https://raw.githubusercontent.com/MyBoyAKS/Teach-Me-Anything/main/examples/ultra-puzzle-demo.html)

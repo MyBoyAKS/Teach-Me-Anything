@@ -119,7 +119,7 @@ Everything above is in [`TMA_SKILLS.md`](TMA_SKILLS.md). The research behind it:
 <p align="center">
   <a href="https://github.com/MyBoyAKS/Teach-Me-Anything/raw/main/TMA_AI_PACK.zip"><img src="https://img.shields.io/badge/Download%20TMA%20AI%20pack%20(.zip)-2ea043?style=for-the-badge&logo=github&logoColor=white" alt="Download TMA AI pack" height="42"></a>
 </p>
-<p align="center"><sub>Just <b>3 files</b> (about 10 KB), so it uploads fully every time.<br>Want everything, including the GIFs and demo pages? <a href="https://github.com/MyBoyAKS/Teach-Me-Anything/archive/refs/heads/main.zip">Download the full repo ZIP</a> (about 4 MB, not for uploading to an AI).</sub></p>
+<p align="center"><sub><b>3 files + 3 example pages</b> (about 25 KB), so it uploads fully every time.<br>Want everything, including the GIFs? <a href="https://github.com/MyBoyAKS/Teach-Me-Anything/archive/refs/heads/main.zip">Download the full repo ZIP</a> (about 4 MB, not for uploading to an AI).</sub></p>
 
 <p align="center"><img src="assets/tutorial.gif" width="340" alt="Tutorial: download the ZIP, unzip, give the files to your AI, answer its questions, get your lesson"></p>
 
@@ -130,16 +130,21 @@ Everything above is in [`TMA_SKILLS.md`](TMA_SKILLS.md). The research behind it:
 | **`TMA_SKILLS.md`** | **The main file.** Everything the AI needs: the first questions, the teaching rules, all 3 modes and annotate. Works on its own. |
 | `TMA_WIDGET_ENGINE.md` | The technical guide the AI reads only when building a Widget or Ultra page. |
 | `TMA_annotate.py` | A small script the AI runs to draw the red / green / yellow marks on your photo. |
+| `examples/widget-demo-basic.html` | A working Widget page (2x + 3 = 7). The AI copies how it works; you can open it in a browser too. |
+| `examples/widget-demo-pointers.html` | A working Widget page with highlight boxes and arrows. |
+| `examples/ultra-puzzle-demo.html` | A working Ultra "pick the next step" puzzle. |
+
+The example pages are optional: they just help the AI build better Widget and Ultra pages.
 
 ### Option A: give everything to the AI (recommended)
 1. **Download:** click the green button above. You get `TMA_AI_PACK.zip`.
 2. **Unzip:** right-click → **Extract All** (Windows) or double-click (Mac). On a phone, open it in your Files app and tap **Extract**.
-3. **Give it to your AI:** open a new chat, drag in the 3 files, and send **`Start`**.
+3. **Give it to your AI:** open a new chat, drag in all the files (the 3 TMA files and the `examples` pages), and send **`Start`**.
 4. **Answer the AI:** it asks what subject you're studying, what you already know, what trips you up, and what to learn first in which mode (**Normal**, **Widget** or **Ultra**).
 5. **Learn:** it builds your lesson in the mode you picked.
 
 > [!IMPORTANT]
-> Upload the **TMA AI pack** (or the 3 files), not the full repo ZIP. The full ZIP is mostly GIFs and can get cut off during upload.
+> Upload the **TMA AI pack** (or the files inside it), not the full repo ZIP. The full ZIP is mostly GIFs and can get cut off during upload.
 
 > [!TIP]
 > **Using Claude?** Two shortcuts:
@@ -156,10 +161,29 @@ Every file is plain text, so you can **read it first**, then download only what 
 | [`TMA_SKILLS.md`](TMA_SKILLS.md) (enough on its own) | [⬇](https://github.com/MyBoyAKS/Teach-Me-Anything/raw/main/TMA_SKILLS.md) |
 | [`TMA_WIDGET_ENGINE.md`](TMA_WIDGET_ENGINE.md) | [⬇](https://github.com/MyBoyAKS/Teach-Me-Anything/raw/main/TMA_WIDGET_ENGINE.md) |
 | [`TMA_annotate.py`](TMA_annotate.py) | [⬇](https://github.com/MyBoyAKS/Teach-Me-Anything/raw/main/TMA_annotate.py) |
+| [`examples/widget-demo-basic.html`](examples/widget-demo-basic.html) (optional) | [⬇](https://github.com/MyBoyAKS/Teach-Me-Anything/raw/main/examples/widget-demo-basic.html) |
+| [`examples/widget-demo-pointers.html`](examples/widget-demo-pointers.html) (optional) | [⬇](https://github.com/MyBoyAKS/Teach-Me-Anything/raw/main/examples/widget-demo-pointers.html) |
+| [`examples/ultra-puzzle-demo.html`](examples/ultra-puzzle-demo.html) (optional) | [⬇](https://github.com/MyBoyAKS/Teach-Me-Anything/raw/main/examples/ultra-puzzle-demo.html) |
 
 On a computer, the link may open the file as text: press **Ctrl + S** (Mac: **Cmd + S**), or right-click → **Save link as…**
 
 **Shortest version:** open [`TMA_SKILLS.md`](TMA_SKILLS.md), copy all of it, paste it into your AI, and send. It will ask you the same questions as in Option A.
+
+### Option C: let the AI fetch everything itself (no download)
+For an AI that can open links (Claude, ChatGPT, Gemini). Copy this, paste it into a new chat, and send:
+
+```
+Read and follow https://raw.githubusercontent.com/MyBoyAKS/Teach-Me-Anything/main/TMA_SKILLS.md
+Also load these when you need them:
+https://raw.githubusercontent.com/MyBoyAKS/Teach-Me-Anything/main/TMA_WIDGET_ENGINE.md
+https://raw.githubusercontent.com/MyBoyAKS/Teach-Me-Anything/main/TMA_annotate.py
+https://raw.githubusercontent.com/MyBoyAKS/Teach-Me-Anything/main/examples/widget-demo-basic.html
+https://raw.githubusercontent.com/MyBoyAKS/Teach-Me-Anything/main/examples/widget-demo-pointers.html
+https://raw.githubusercontent.com/MyBoyAKS/Teach-Me-Anything/main/examples/ultra-puzzle-demo.html
+Don't download the rest of the repo.
+```
+
+It gets the same files as Option A, just fetched by the AI instead of uploaded by you. If your AI says it can't open links, use Option A.
 
 ### If your AI can't make interactive pages
 Ask for one `.html` file, save it, and open it in your browser. The working pages in [`examples/`](examples/) also open this way: download a file and double-click it.
