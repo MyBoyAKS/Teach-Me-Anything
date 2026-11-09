@@ -138,8 +138,8 @@ The example pages are optional: they just help the AI build better Widget and Ul
 
 ### Option A: give everything to the AI (recommended)
 1. **Download:** click the green button above. You get `TMA_AI_PACK.zip`.
-2. **Unzip:** right-click → **Extract All** (Windows) or double-click (Mac). On a phone, open it in your Files app and tap **Extract**.
-3. **Give it to your AI:** open a new chat, drag in all the files (the 3 TMA files and the `examples` pages), and send **`Start`**.
+2. **Give it to your AI:** open a new chat, attach `TMA_AI_PACK.zip` as it is, and send **`Start`**. Claude and ChatGPT can usually open a ZIP themselves (they need their code / file-analysis tool turned on).
+3. **If your AI says it can't read ZIP files:** unzip it first (right-click → **Extract All** on Windows, double-click on Mac, or **Extract** in your phone's Files app), then attach all the files inside.
 4. **Answer the AI:** it asks what subject you're studying, what you already know, what trips you up, and what to learn first in which mode (**Normal**, **Widget** or **Ultra**).
 5. **Learn:** it builds your lesson in the mode you picked.
 
@@ -169,21 +169,17 @@ On a computer, the link may open the file as text: press **Ctrl + S** (Mac: **Cm
 
 **Shortest version:** open [`TMA_SKILLS.md`](TMA_SKILLS.md), copy all of it, paste it into your AI, and send. It will ask you the same questions as in Option A.
 
-### Option C: let the AI fetch everything itself (no download)
-For an AI that can open links (Claude, ChatGPT, Gemini). Copy this, paste it into a new chat, and send:
+### Option C: let the AI fetch the files itself (no download)
+For an AI that can open links (Claude, ChatGPT, Gemini). Copy this one line into a new chat and send:
 
 ```
-Read and follow https://raw.githubusercontent.com/MyBoyAKS/Teach-Me-Anything/main/TMA_SKILLS.md
-Also load these when you need them:
-https://raw.githubusercontent.com/MyBoyAKS/Teach-Me-Anything/main/TMA_WIDGET_ENGINE.md
-https://raw.githubusercontent.com/MyBoyAKS/Teach-Me-Anything/main/TMA_annotate.py
-https://raw.githubusercontent.com/MyBoyAKS/Teach-Me-Anything/main/examples/widget-demo-basic.html
-https://raw.githubusercontent.com/MyBoyAKS/Teach-Me-Anything/main/examples/widget-demo-pointers.html
-https://raw.githubusercontent.com/MyBoyAKS/Teach-Me-Anything/main/examples/ultra-puzzle-demo.html
-Don't download the rest of the repo.
+Read https://raw.githubusercontent.com/MyBoyAKS/Teach-Me-Anything/main/TMA_SKILLS.md and follow it. Don't download the rest of the repo.
 ```
 
-It gets the same files as Option A, just fetched by the AI instead of uploaded by you. If your AI says it can't open links, use Option A.
+`TMA_SKILLS.md` has the links to the other files inside, so the AI opens the widget guide, the annotate script and the examples only when it needs them. If your AI says it can't open links, use Option A.
+
+> [!TIP]
+> **Copy button:** in a browser on github.com, hover over (or tap) the grey box and a copy button appears in its top-right corner. The GitHub **app** doesn't show it: long-press the text instead, or open this page in your browser.
 
 ### If your AI can't make interactive pages
 Ask for one `.html` file, save it, and open it in your browser. The working pages in [`examples/`](examples/) also open this way: download a file and double-click it.
