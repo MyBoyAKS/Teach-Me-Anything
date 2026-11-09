@@ -146,12 +146,6 @@ The example pages are optional: they just help the AI build better Widget and Ul
 > [!IMPORTANT]
 > Upload the **TMA AI pack** (or the files inside it), not the full repo ZIP. The full ZIP is mostly GIFs and can get cut off during upload.
 
-> [!TIP]
-> **Using Claude?** Two shortcuts:
-> - **Straight from GitHub:** in a chat or Project, tap **+** → **Add from GitHub** and pick this repo. No download needed (connect GitHub the first time).
-> - **As a real Claude skill:** download [`TMA_CLAUDE_SKILL.zip`](https://github.com/MyBoyAKS/Teach-Me-Anything/raw/main/TMA_CLAUDE_SKILL.zip) and upload it in Claude's **Settings → Capabilities → Skills**. Then every chat can use it.
-
-
 ### Option B: file by file (if you'd rather check everything yourself)
 Every file is plain text, so you can **read it first**, then download only what you want:
 
