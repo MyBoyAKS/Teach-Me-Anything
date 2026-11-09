@@ -68,67 +68,89 @@ This repo is the result: the prompt, the three modes, and the rules behind them,
 
 <p align="center"><img src="assets/mode-widget.gif" width="340" alt="Widget mode: moving algebra with arrows and a synced graph"></p>
 
+### Even Normal mode beats a plain AI chat
+To be honest: it's the **same AI**, not a smarter one. TMA just gives it better teaching habits. Same question, two answers:
+
+> **Question:** solve a + b = 3 and b = −3a.
+
+| Plain AI | TMA, Normal mode |
+|---|---|
+| "Substitute: a − 3a = 3, so a = −3/2 and b = 9/2." | **Step 1, swap b for −3a** (equation 2 says they're the same thing): a + (−3a) = 3 |
+| | **Step 2, combine:** 1a − 3a = −2a, so −2a = 3 |
+| | **Step 3, divide:** a = 3 ÷ (−2) = −3/2 |
+| | **Step 4, find b:** b = −3 × (−3/2) = +9/2 (minus × minus = plus, your usual trap) |
+| | **Write in your book:** the 4 lines above. **Check:** −3/2 + 9/2 = 6/2 = 3 ✓ |
+
+What TMA adds, even without any widget:
+- **Asks about you first**, so the steps match your level and your usual mistakes.
+- **Real numbers first, every step shown**, with a short *why* for each.
+- **Points at your exact wrong line** instead of re-explaining everything.
+- **Ends with what to write and check numbers**, so you can verify it yourself.
+- **Hint-only mode** when you want to solve it alone.
+- **Annotates your photo** when you're stuck (below).
+
 ### Bonus: annotate my work (works in every mode)
-Stuck? Send a photo of what you wrote. The AI marks it up like a teacher:
+Stuck? Send a photo of what you wrote. The AI draws on **your photo** like a teacher:
 
 - 🔴 **Red** circle or box: wrong, with a short reason
 - 🟢 **Green** right beside it: the corrected version
 - 🟡 **Yellow** box: not wrong, but could be better (with the option)
+- 🟢 **✓**: correct
 
-If the AI seems to be explaining in circles, it will ask you for a photo, because the mistake is usually in one line.
+If everything is right, there's no red at all: it never invents mistakes. If the AI seems to be explaining in circles, it asks for a photo, because the mistake is usually in one line.
 
 <p align="center"><img src="assets/annotate-demo.gif" width="420" alt="Annotate: yellow suggestion, red circle on the wrong sign, green fix beside it"></p>
 
-Full specs: [`modes/normal.md`](modes/normal.md) · [`modes/widget.md`](modes/widget.md) · [`modes/ultra.md`](modes/ultra.md) · [`modes/annotate.md`](modes/annotate.md) · Research behind the modes: [`evidence.md`](evidence.md)
+Everything above is in [`TMA_SKILLS.md`](TMA_SKILLS.md). The research behind it: [`TMA_EVIDENCE.md`](TMA_EVIDENCE.md).
 
 ---
 
 ## 5. DOWNLOAD
 
 <p align="center">
-  <a href="https://github.com/MyBoyAKS/Teach-Me-Anything/raw/main/Teach-Me-Anything-AI-pack.zip"><img src="https://img.shields.io/badge/Download%20AI%20pack%20(.zip)-2ea043?style=for-the-badge&logo=github&logoColor=white" alt="Download AI pack" height="42"></a>
+  <a href="https://github.com/MyBoyAKS/Teach-Me-Anything/raw/main/TMA_AI_PACK.zip"><img src="https://img.shields.io/badge/Download%20TMA%20AI%20pack%20(.zip)-2ea043?style=for-the-badge&logo=github&logoColor=white" alt="Download TMA AI pack" height="42"></a>
 </p>
-<p align="center"><sub>The <b>AI pack</b> is tiny (about 20 KB, only the .md files the AI needs), so it uploads fully every time.<br>Want everything, including the GIFs and demo pages? <a href="https://github.com/MyBoyAKS/Teach-Me-Anything/archive/refs/heads/main.zip">Download the full repo ZIP</a> (about 4 MB, not for uploading to an AI).</sub></p>
+<p align="center"><sub>Just <b>3 files</b> (about 10 KB), so it uploads fully every time.<br>Want everything, including the GIFs and demo pages? <a href="https://github.com/MyBoyAKS/Teach-Me-Anything/archive/refs/heads/main.zip">Download the full repo ZIP</a> (about 4 MB, not for uploading to an AI).</sub></p>
 
 <p align="center"><img src="assets/tutorial.gif" width="340" alt="Tutorial: download the ZIP, unzip, give the files to your AI, answer its questions, get your lesson"></p>
 
+### What's inside
+
+| File | What it does |
+|---|---|
+| **`TMA_SKILLS.md`** | **The main file.** Everything the AI needs: the first questions, the teaching rules, all 3 modes and annotate. Works on its own. |
+| `TMA_WIDGET_ENGINE.md` | The technical guide the AI reads only when building a Widget or Ultra page. |
+| `TMA_annotate.py` | A small script the AI runs to draw the red / green / yellow marks on your photo. |
+
 ### Option A: give everything to the AI (recommended)
-1. **Download:** click the green **Download AI pack** button above. You get `Teach-Me-Anything-AI-pack.zip`.
-2. **Unzip:** right-click the file → **Extract All** (Windows) or double-click it (Mac). On a phone, open it in your Files app and tap **Extract**.
-3. **Give it to your AI:** open a new chat and drag in all the files from the folder (the .md files, plus `annotate.py` if your AI accepts it). Then send **`Start`**.
-4. **Answer the AI:** it reads `START-HERE.md` and asks you:
-   - what subject you're studying,
-   - what you already know well,
-   - what usually trips you up,
-   - what you want to learn first, and which mode (**Normal**, **Widget** or **Ultra**).
+1. **Download:** click the green button above. You get `TMA_AI_PACK.zip`.
+2. **Unzip:** right-click → **Extract All** (Windows) or double-click (Mac). On a phone, open it in your Files app and tap **Extract**.
+3. **Give it to your AI:** open a new chat, drag in the 3 files, and send **`Start`**.
+4. **Answer the AI:** it asks what subject you're studying, what you already know, what trips you up, and what to learn first in which mode (**Normal**, **Widget** or **Ultra**).
 5. **Learn:** it builds your lesson in the mode you picked.
 
 > [!IMPORTANT]
-> Upload the **AI pack** (or the .md files), not the full repo ZIP. The full ZIP is mostly GIFs and can get cut off during upload, so the AI ends up missing files.
+> Upload the **TMA AI pack** (or the 3 files), not the full repo ZIP. The full ZIP is mostly GIFs and can get cut off during upload.
 
 > [!TIP]
-> Using Claude? Put the files in a **Project** once, and every new chat in that project already knows the method.
+> **Using Claude?** Two shortcuts:
+> - **Straight from GitHub:** in a chat or Project, tap **+** → **Add from GitHub** and pick this repo. No download needed (connect GitHub the first time).
+> - **As a real Claude skill:** download [`TMA_CLAUDE_SKILL.zip`](https://github.com/MyBoyAKS/Teach-Me-Anything/raw/main/TMA_CLAUDE_SKILL.zip) and upload it in Claude's **Settings → Capabilities → Skills**. Then every chat can use it.
+>
+> Any AI that can browse the web also works: paste this repo's link and say *"read TMA_SKILLS.md in this repo and follow it"*.
 
 ### Option B: file by file (if you'd rather check everything yourself)
-Don't want to download a ZIP from a stranger? Fair. Every file is plain text, so you can **read each one first** and download only what you want:
+Every file is plain text, so you can **read it first**, then download only what you want:
 
-| File | What it is | Download |
-|---|---|:-:|
-| [`START-HERE.md`](START-HERE.md) | tells the AI what to do first | [⬇ download](https://github.com/MyBoyAKS/Teach-Me-Anything/raw/main/START-HERE.md) |
-| [`quick-start.md`](quick-start.md) | the full prompt and the 3 modes | [⬇ download](https://github.com/MyBoyAKS/Teach-Me-Anything/raw/main/quick-start.md) |
-| [`learner-profile.md`](learner-profile.md) | profile template + example | [⬇ download](https://github.com/MyBoyAKS/Teach-Me-Anything/raw/main/learner-profile.md) |
-| [`modes/normal.md`](modes/normal.md) | Normal mode spec | [⬇ download](https://github.com/MyBoyAKS/Teach-Me-Anything/raw/main/modes/normal.md) |
-| [`modes/widget.md`](modes/widget.md) | Widget mode spec | [⬇ download](https://github.com/MyBoyAKS/Teach-Me-Anything/raw/main/modes/widget.md) |
-| [`modes/ultra.md`](modes/ultra.md) | Ultra mode spec | [⬇ download](https://github.com/MyBoyAKS/Teach-Me-Anything/raw/main/modes/ultra.md) |
-| [`modes/annotate.md`](modes/annotate.md) | red / green / yellow marking of your work | [⬇ download](https://github.com/MyBoyAKS/Teach-Me-Anything/raw/main/modes/annotate.md) |
-| [`skills/annotate-mistakes/SKILL.md`](skills/annotate-mistakes/SKILL.md) | annotate skill (Claude skill format) | [⬇ download](https://github.com/MyBoyAKS/Teach-Me-Anything/raw/main/skills/annotate-mistakes/SKILL.md) |
-| [`skills/annotate-mistakes/annotate.py`](skills/annotate-mistakes/annotate.py) | draws the marks on your photo | [⬇ download](https://github.com/MyBoyAKS/Teach-Me-Anything/raw/main/skills/annotate-mistakes/annotate.py) |
-| [`widget-engine.md`](widget-engine.md) | how to build the interactive page | [⬇ download](https://github.com/MyBoyAKS/Teach-Me-Anything/raw/main/widget-engine.md) |
-| [`evidence.md`](evidence.md) | the research behind it | [⬇ download](https://github.com/MyBoyAKS/Teach-Me-Anything/raw/main/evidence.md) |
+| File | Download |
+|---|:-:|
+| [`TMA_SKILLS.md`](TMA_SKILLS.md) (enough on its own) | [⬇](https://github.com/MyBoyAKS/Teach-Me-Anything/raw/main/TMA_SKILLS.md) |
+| [`TMA_WIDGET_ENGINE.md`](TMA_WIDGET_ENGINE.md) | [⬇](https://github.com/MyBoyAKS/Teach-Me-Anything/raw/main/TMA_WIDGET_ENGINE.md) |
+| [`TMA_annotate.py`](TMA_annotate.py) | [⬇](https://github.com/MyBoyAKS/Teach-Me-Anything/raw/main/TMA_annotate.py) |
 
-On a computer, the download link may open the file as text: press **Ctrl + S** (Mac: **Cmd + S**) to save it, or right-click the link → **Save link as…**
+On a computer, the link may open the file as text: press **Ctrl + S** (Mac: **Cmd + S**), or right-click → **Save link as…**
 
-**Shortest version:** open [`quick-start.md`](quick-start.md), copy the text inside the grey box, paste it into your AI, and send. It will ask you the same questions as in Option A.
+**Shortest version:** open [`TMA_SKILLS.md`](TMA_SKILLS.md), copy all of it, paste it into your AI, and send. It will ask you the same questions as in Option A.
 
 ### If your AI can't make interactive pages
 Ask for one `.html` file, save it, and open it in your browser. The working pages in [`examples/`](examples/) also open this way: download a file and double-click it.

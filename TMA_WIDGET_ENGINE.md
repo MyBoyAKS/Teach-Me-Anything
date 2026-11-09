@@ -1,6 +1,8 @@
-# Widget engine: how to build the "video" page
+# TMA Widget engine: how to build the "video" page
 
-A recipe any AI (or person) can follow to build the Widget player. Working examples: [`examples/widget-demo-basic.html`](examples/widget-demo-basic.html) and [`examples/widget-demo-pointers.html`](examples/widget-demo-pointers.html).
+*Part of TMA (Teach Me Anything). Read this only when building a Widget or Ultra page described in `TMA_SKILLS.md`.*
+
+A recipe any AI (or person) can follow to build the Widget player. Working examples: `examples/widget-demo-basic.html` (on GitHub) and `examples/widget-demo-pointers.html` (on GitHub).
 
 ---
 

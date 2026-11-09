@@ -1,4 +1,4 @@
-# What the research says
+# TMA evidence: What the research says
 
 Honest note first: **nobody has tested "Normal vs Widget vs Ultra" as packages.** What exists is strong research on the *ingredients* each mode uses. This page maps each ingredient to the evidence, with effect sizes where the papers report them.
 
